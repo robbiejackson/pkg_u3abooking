@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="COM_U3ABOOKING_EVENT_MENUTYPE_TITLE">
+		<message>COM_U3ABOOKING_EVENT_MENUTYPE_DESC</message>
+	</layout>
+	<fields name="request" addfieldpath="/administrator/components/com_u3abooking/models/fields">
+		<fieldset name="request">
+			<field
+				name="eventid"
+				type="modal_event"
+				required="true"
+				label="COM_U3ABOOKING_MODAL_EVENT_LABEL"
+				description="COM_U3ABOOKING_MODAL_EVENT_DESC"
+				/>
+		</fieldset>
+	</fields>
+</metadata>

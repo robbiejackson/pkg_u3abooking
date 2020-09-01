@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.9.0" method="upgrade">
+
+	<name>COM_U3ABOOKING</name>
+	<creationDate>July 2020</creationDate>
+	<author>Robbie Jackson</author>
+	<authorEmail>robbie.jackson.email@gmail.org</authorEmail>
+	<copyright>Copyright 2020</copyright>
+	<version>0.0.3</version>
+	<description>COM_U3ABOOKING_DESCRIPTION</description>
+
+    <install>
+		<sql>
+			<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+		</sql>
+	</install>
+	
+	<uninstall> 
+		<sql>
+			<file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+		</sql>
+	</uninstall>
+    
+ 	<update>
+		<schemas>
+			<schemapath type="mysql">sql/updates/mysql</schemapath>
+		</schemas>
+	</update>
+	
+	<scriptfile>script.php</scriptfile>
+
+	<files folder="site">
+		<filename>u3abooking.php</filename>
+        <filename>controller.php</filename>
+		<folder>controllers</folder>
+		<folder>models</folder>
+		<folder>views</folder>
+	</files>
+
+	<languages folder="site/language">
+		<language tag="en-GB">en-GB/en-GB.com_u3abooking.ini</language>
+    </languages>
+	
+    <media destination="com_u3abooking" folder="media">
+		<folder>js</folder>
+	</media>
+
+	<administration>
+		<!-- Administration Menu Section -->
+		<menu link='index.php?option=com_u3abooking'>U3A Booking</menu>
+		<submenu>
+			<menu
+				link="option=com_u3abooking&amp;view=events"
+				view="events"
+				alt="U3A booking/events"
+				>
+				Events
+			</menu>
+			<menu
+				link="option=com_u3abooking&amp;view=bookings"
+				view="bookings"
+				alt="U3A booking/bookings"
+				>
+				Bookings
+			</menu>
+			<menu
+				link="option=com_categories&amp;extension=com_u3abooking"
+				view="categories"
+				alt="U3A booking/categories"
+				>
+				Categories
+			</menu>
+		</submenu>
+		<files folder="admin">
+			<filename>u3abooking.php</filename>
+            <filename>controller.php</filename>
+			<filename>access.xml</filename>
+			<folder>controllers</folder>
+			<folder>helpers</folder>
+			<folder>models</folder>
+			<folder>sql</folder>
+			<folder>tables</folder>
+			<folder>views</folder>
+        </files>
+        <languages folder="admin/language">
+			<language tag="en-GB">en-GB/en-GB.com_u3abooking.sys.ini</language>
+            <language tag="en-GB">en-GB/en-GB.com_u3abooking.ini</language>
+		</languages>
+	</administration>
+
+</extension>

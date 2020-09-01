@@ -1,0 +1,1 @@
+ALTER TABLE`#__u3a_event` ADD COLUMN `organiser_email` varchar(100) NOT NULL DEFAULT '' AFTER `description`;

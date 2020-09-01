@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+		<field
+				name="id"
+				type="hidden"
+				/>
+        <field
+				name="title"
+				type="text"
+				label="COM_U3ABOOKING_EVENT_FIELD_TITLE_LABEL"
+				description="COM_U3ABOOKING_EVENT_FIELD_TITLE_DESC"
+				size="50"
+				class="inputbox"
+				required="true"
+				default=""
+				/>
+		<field 
+				name="alias" 
+				type="text" 
+				label="JFIELD_ALIAS_LABEL"
+				description="JFIELD_ALIAS_DESC"
+				hint="JFIELD_ALIAS_PLACEHOLDER"
+				size="40" 
+				/>
+		<field 	name="description" 
+				type="editor"
+				label="COM_U3ABOOKING_EVENT_FIELD_DESCRIPTION_LABEL" 
+				description="COM_U3ABOOKING_EVENT_FIELD_DESCRIPTION_DESC"
+				filter="JComponentHelper::filterText" 
+				buttons="true" 
+		/>
+	<fieldset
+				name="details"
+				label="COM_U3ABOOKING_EVENT_DETAILS"
+	>
+		<field
+				name="venue"
+				type="text"
+				label="COM_U3ABOOKING_EVENT_FIELD_VENUE_LABEL"
+				description="COM_U3ABOOKING_EVENT_FIELD_VENUE_DESC"
+				size="50"
+				class="inputbox"
+				required="true"
+				default=""
+				/>
+		<field
+				name="organiser_email"
+				type="email"
+				label="COM_U3ABOOKING_EVENT_FIELD_ORGANISER_LABEL"
+				description="COM_U3ABOOKING_EVENT_FIELD_ORGANISER_DESC"
+				size="50"
+				class="inputbox"
+				required="true"
+				default=""
+				/>
+		<field
+				name="event_start"
+				type="calendar"
+				label="COM_U3ABOOKING_EVENT_FIELD_START_LABEL"
+				description="COM_U3ABOOKING_EVENT_FIELD_START_DESC"
+				showtime="true" 
+				translateformat="true"
+				format="%Y-%m-%d %H:%M"
+				size="22"
+				required="true"
+				/>
+		<field
+				name="event_end"
+				type="calendar"
+				label="COM_U3ABOOKING_EVENT_FIELD_END_LABEL"
+				description="COM_U3ABOOKING_EVENT_FIELD_END_DESC"
+				showtime="true" 
+				translateformat="true"
+				format="%Y-%m-%d %H:%M"
+				size="22"
+				required="true"
+				/>
+		<field
+				name="capacity"
+				type="number"
+				label="COM_U3ABOOKING_EVENT_FIELD_CAPACITY_LABEL"
+				description="COM_U3ABOOKING_EVENT_FIELD_CAPACITY_DESC"
+				min="1"
+				max="2000"
+				class="inputbox"
+				required="true"
+				default="1"
+				/>
+		<field
+				name="max_tickets_per_booking"
+				type="number"
+				label="COM_U3ABOOKING_EVENT_FIELD_MAX_TICKETS_LABEL"
+				description="COM_U3ABOOKING_EVENT_FIELD_MAX_TICKETS_DESC"
+				min="1"
+				max="100"
+				class="inputbox"
+				required="true"
+				default="1"
+				/>
+		<field 	name="published" 
+				type="list" 
+				label="JSTATUS"
+				description="JFIELD_PUBLISHED_DESC" 
+				class="chzn-color-state"
+				filter="intval" 	
+				size="1" 
+				default="1"
+		>
+			<option value="1">
+				JPUBLISHED</option>
+			<option value="0">
+				JUNPUBLISHED</option>
+		</field>
+		<field  
+				name="access" 
+				type="accesslevel" 
+				label="JFIELD_ACCESS_LABEL"
+				description="JFIELD_ACCESS_DESC"
+		>
+		</field>
+		<field
+				name="catid"
+				type="category"
+				extension="com_u3abooking"
+				class="inputbox"
+				default=""
+				label="COM_U3ABOOKING_EVENT_FIELD_CATID_LABEL"
+				description="COM_U3ABOOKING_EVENT_FIELD_CATID_DESC"
+				required="true"
+		>
+		</field>
+
+    </fieldset>
+		<field 	name="description" 
+				type="editor"
+				label="COM_U3ABOOKING_EVENT_FIELD_DESCRIPTION_LABEL" 
+				description="COM_U3ABOOKING_EVENT_FIELD_DESCRIPTION_DESC"
+				filter="JComponentHelper::filterText" 
+				buttons="true" 
+		/>
+
+
+</form>

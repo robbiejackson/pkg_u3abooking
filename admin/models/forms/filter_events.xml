@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="filter">
+		<field
+			name="search"
+			type="text"
+			label="COM_U3ABOOKING_SEARCH_IN_TITLE"
+			hint="JSEARCH_FILTER"
+			class="js-stools-search-string"
+		/>
+		<field
+			name="published"
+			type="status"
+			label="JOPTION_SELECT_PUBLISHED"
+			description="JOPTION_SELECT_PUBLISHED_DESC"
+			onchange="this.form.submit();"
+			>
+			<option value="">JOPTION_SELECT_PUBLISHED</option>
+			</field>
+		<field
+			name="event_start"
+			type="calendar"
+			label="Start"
+			description="Start"
+			default="now"
+			onchange="this.form.submit();"
+			>
+			</field>
+		<field
+			name="category_id"
+			type="category"
+			label="JOPTION_FILTER_CATEGORY"
+			extension="COM_U3ABOOKING"
+			onchange="this.form.submit();"
+			published="0,1,2"
+			>
+			<option value="">JOPTION_SELECT_CATEGORY</option>
+		</field>
+	</fields>
+	<fields name="list">
+        <field
+			name="fullordering"
+			type="list"
+			label="COM_U3ABOOKING_LIST_FULL_ORDERING"
+			description="COM_U3ABOOKING_LIST_FULL_ORDERING_DESC"
+			onchange="this.form.submit();"
+			default="id ASC"
+			>
+			<option value="">JGLOBAL_SORT_BY</option>
+			<option value="ordering ASC">COM_U3ABOOKING_ORDERING_ASC</option>
+			<option value="ordering DESC">COM_U3ABOOKING_ORDERING_DESC</option>
+			<option value="title ASC">COM_U3ABOOKING_TITLE_ASC</option>
+			<option value="title DESC">COM_U3ABOOKING_TITLE_DESC</option>
+			<option value="venue ASC">COM_U3ABOOKING_VENUE_ASC</option>
+            <option value="venue DESC">COM_U3ABOOKING_VENUE_DESC</option>
+			<option value="event_start ASC">COM_U3ABOOKING_EVENT_START_ASC</option>
+            <option value="event_start DESC">COM_U3ABOOKING_EVENT_START_DESC</option>
+			<option value="id ASC">JGRID_HEADING_ID_ASC</option>
+			<option value="id DESC">JGRID_HEADING_ID_DESC</option>
+            <option value="author ASC">COM_U3ABOOKING_AUTHOR_ASC</option>
+            <option value="author DESC">COM_U3ABOOKING_AUTHOR_DESC</option>
+            <option value="created ASC">COM_U3ABOOKING_CREATED_ASC</option>
+            <option value="created DESC">COM_U3ABOOKING_CREATED_DESC</option>
+			<option value="access ASC">COM_U3ABOOKING_ACCESS_ASC</option>
+			<option value="access DESC">COM_U3ABOOKING_ACCESS_DESC</option>
+		</field>
+		<field
+			name="limit"
+			type="limitbox"
+			class="input-mini"
+			default="25"
+			label="COM_U3ABOOKING_LIST_LIMIT"
+			onchange="this.form.submit();"
+		/>
+	</fields>
+</form>
