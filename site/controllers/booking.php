@@ -70,12 +70,18 @@ class U3ABookingControllerBooking extends JControllerForm
 		// set up context for clearing form data
 		$context = "$this->option.edit.$this->context"; 
 		$app->setUserState($context . '.data', null);
-        
-        // set up the redirect to the site home page
-        $this->setRedirect(
-            (string)Uri::root(), 
-            JText::_(COM_U3ABOOKING_AMENDMENT_CANCELLED)
-		);
+		
+		// if there's a return parameter in the URL then use it
+		$returnParam = $app->input->get('return', '', 'cmd');
+		if ($returnParam)
+		{
+			$returnUrl = base64_decode($returnParam);
+		}
+		else
+		{	// use the site home page as the redirect URL
+			$returnUrl = (string)Uri::root();
+		}
+        $this->setRedirect($returnUrl, JText::_(COM_U3ABOOKING_AMENDMENT_CANCELLED));
 	}
 	
     /*
