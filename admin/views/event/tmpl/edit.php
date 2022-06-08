@@ -5,6 +5,7 @@
 
 defined('_JEXEC') or die('Restricted access');
 use Joomla\CMS\Factory;
+use Joomla\CMS\Uri\Uri;
 
 JHtml::_('behavior.formvalidator');
 
@@ -64,6 +65,8 @@ $tmpl = $input->getCmd('tmpl', '') === 'component' ? '&tmpl=component' : '';
             <div class="row-fluid">
                 <div class="span3">
                     <?php echo $this->form->renderFieldset('details');  ?>
+					<?php $url = Uri::root() . "component/u3abooking/?view=booking&layout=add&eventid={$this->item->id}";  ?>
+					<?php echo "Booking URL: <a href=\"{$url}\">URL</a>";  ?>
                 </div>
 				<div class="span9">
                     <?php echo $this->form->getInput('description');  ?>
