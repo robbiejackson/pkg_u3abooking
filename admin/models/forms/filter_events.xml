@@ -22,7 +22,7 @@
 			type="calendar"
 			label="Start"
 			description="Start"
-			default="now"
+            hint="COM_U3ABOOKING_EVENTS_FROM"
 			onchange="this.form.submit();"
 			>
 			</field>

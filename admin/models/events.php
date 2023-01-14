@@ -123,8 +123,8 @@ class U3ABookingModelEvents extends ListModel
 		}
 		
 		// Add the list ordering clause.
-		$orderCol   = $this->state->get('list.ordering', 'ordering');
-		$orderDirn 	= $this->state->get('list.direction', 'asc');
+		$orderCol   = $this->state->get('list.ordering', 'event_start');
+		$orderDirn 	= $this->state->get('list.direction', 'desc');
 
 		$query->order($db->escape($orderCol) . ' ' . $db->escape($orderDirn));
 

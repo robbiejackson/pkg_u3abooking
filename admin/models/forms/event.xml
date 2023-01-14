@@ -61,7 +61,6 @@
 				showtime="true" 
 				translateformat="true"
 				format="%Y-%m-%d %H:%M"
-				size="22"
 				required="true"
 				/>
 		<field
@@ -72,7 +71,6 @@
 				showtime="true" 
 				translateformat="true"
 				format="%Y-%m-%d %H:%M"
-				size="22"
 				required="true"
 				/>
 		<field
