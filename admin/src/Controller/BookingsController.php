@@ -1,18 +1,21 @@
 <?php
+namespace Robbie\Component\U3ABooking\Administrator\Controller;
 
 defined('_JEXEC') or die('Restricted access');
 use Joomla\CMS\MVC\Controller\AdminController;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Session\Session;
+use Joomla\CMS\Uri\Uri;
 
 /**
  * Controller handling operations on multiple booking records
  */
-class U3ABookingControllerBookings extends AdminController
+class BookingsController extends AdminController
 {
 	/**
 	 * Use the Booking model for all operations, rather than having a separate Bookings model 
 	 */
-	public function getModel($name = 'Booking', $prefix = 'U3ABookingModel', $config = array('ignore_request' => true))
+	public function getModel($name = 'Booking', $prefix = 'administrator', $config = array('ignore_request' => true))
 	{
 		$model = parent::getModel($name, $prefix, $config);
 		return $model;
@@ -20,7 +23,7 @@ class U3ABookingControllerBookings extends AdminController
 	
 	public function csvexport()
 	{
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		Session::checkToken();
 		
 		$app = Factory::getApplication(); 
 		$input = $app->input; 
@@ -28,7 +31,7 @@ class U3ABookingControllerBookings extends AdminController
 		$eventModel = $this->getModel('event');
                
 		// Get the current URI to set in redirects. 
-		$currentUri = (string)JUri::getInstance();
+		$currentUri = (string)Uri::getInstance();
        
 	    // get the event whose bookings are to be exported - this should be set in the filter field
 		$filters  = $input->get('filter', array(), 'array');

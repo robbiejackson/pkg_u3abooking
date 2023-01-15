@@ -1,4 +1,6 @@
 <?php
+namespace Robbie\Component\U3ABooking\Administrator\Controller;
+
 /**
  * Controller for handling booking.xxx tasks
  */
@@ -8,21 +10,24 @@ use Joomla\CMS\Router\Route;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Table\Table;
 use Joomla\CMS\Log\Log;
+use Joomla\CMS\Session\Session;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Uri\Uri;
 
 
-class U3ABookingControllerBooking extends FormController
+class BookingController extends FormController
 {
 	public function add()
 	{
 		$this->setRedirect(Route::_('index.php?option=com_u3abooking&view=bookings', false),
-			JText::_('JLIB_APPLICATION_ERROR_CREATE_RECORD_NOT_PERMITTED'), 'error');
+			Text::_('JLIB_APPLICATION_ERROR_CREATE_RECORD_NOT_PERMITTED'), 'error');
 		return false;
 	}
 	
 	public function save($key = null, $urlVar = null)
     {
 		// Check for request forgeries.
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		Session::checkToken();
         
 		$app = Factory::getApplication(); 
 		$input = $app->input; 
@@ -31,7 +36,7 @@ class U3ABookingControllerBooking extends FormController
                
 		// Get the current URI to set in redirects. As we're handling a POST, 
 		// this URI comes from the <form action="..."> attribute in the layout file above
-		$currentUri = (string)JUri::getInstance();
+		$currentUri = (string)Uri::getInstance();
 		
 		// for redirecting back to the booking form
 		$bookingsURL = Route::_('index.php?option=com_u3abooking&view=bookings', false);
@@ -44,9 +49,9 @@ class U3ABookingControllerBooking extends FormController
 		$data  = $input->get('jform', array(), 'array');
 	   
 	    // Access check.
-		if (!Factory::getUser()->authorise('core.edit', 'com_u3abooking'))
+		if (!Factory::getApplication()->getIdentity()->authorise('core.edit', 'com_u3abooking'))
 		{
-			$this->setError(\JText::_('JLIB_APPLICATION_ERROR_SAVE_NOT_PERMITTED'));
+			$this->setError(Text::_('JLIB_APPLICATION_ERROR_SAVE_NOT_PERMITTED'));
 			$this->setMessage($this->getError(), 'error');
 
 			$this->setRedirect($normalRedirectURL);
@@ -136,7 +141,7 @@ class U3ABookingControllerBooking extends FormController
 		if (!$model->save($validData))
 		{
             // Handle the case where the save failed - redirect back to the edit form
-			$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_SAVE_FAILED', $model->getError()));
+			$this->setError(Text::sprintf('JLIB_APPLICATION_ERROR_SAVE_FAILED', $model->getError()));
 			$this->setMessage($this->getError(), 'error');
 			$this->setRedirect($currentUri);
 			
@@ -150,12 +155,12 @@ class U3ABookingControllerBooking extends FormController
 		
 		if (isset($validData['send_email']) && ($validData['send_email'] == 1))
 		{
-			$event = Table::getInstance('Event', 'U3ABookingTable');
+			$event = $eventModel->getTable();
 			$event->load($validData["event_id"]);
 			$this->sendEmail($validData['id'], $validData, $event);
 		}
 		
-		$this->setRedirect($normalRedirectURL, JText::_('JLIB_APPLICATION_SAVE_SUCCESS'), 'message');
+		$this->setRedirect($normalRedirectURL, Text::_('JLIB_APPLICATION_SAVE_SUCCESS'), 'message');
 		
 		return true;
 	}
@@ -197,13 +202,5 @@ class U3ABookingControllerBooking extends FormController
 			Log::add('Send email exception: ' . $e->getMessage(), Log::Error, 'u3a-error');
 		}
 	}
-	
-	/*
-	public function batch($model = null)
-	{
-		$model = $this->getModel('booking');
-		$this->setRedirect((string)JUri::getInstance());
-		return parent::batch($model);
-	}
-	*/
+
 }

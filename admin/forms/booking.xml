@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<form addrulepath="/administrator/components/com_u3abooking/models/rules">
+<form addruleprefix="Robbie\Component\U3ABooking\Administrator\Rule">
     <fieldset name="booking_details">
 		<field
 				name="id"
@@ -19,7 +19,7 @@
 				description="COM_U3ABOOKING_BOOKING_REF_DESC"
 				class="inputbox validate-bookingref"
 				required="true"
-				validate="bookingRefPart"
+				validate="bookingref"
 				/>
 		<field
 				name="num_tickets"

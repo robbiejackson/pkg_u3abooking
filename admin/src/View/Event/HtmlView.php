@@ -1,13 +1,18 @@
 <?php
+namespace Robbie\Component\U3ABooking\Administrator\View\Event;
+
 /**
  * View which provides the form for creating / editing an event
  */
 
 defined('_JEXEC') or die('Restricted access');
-use Joomla\CMS\MVC\View\HtmlView;
+use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Helper\ContentHelper;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Toolbar\ToolbarHelper;
 
-class U3ABookingViewEvent extends HtmlView
+class HtmlView extends BaseHtmlView 
 {
 
 	protected $form = null;
@@ -23,12 +28,11 @@ class U3ABookingViewEvent extends HtmlView
 		$this->item = $this->get('Item');
         $this->script = $this->get('Script');
 
-		$this->canDo = JHelperContent::getActions('com_u3abooking', 'event', $this->item->id);
+		$this->canDo = ContentHelper::getActions('com_u3abooking', 'event', $this->item->id);
         
 		if (count($errors = $this->get('Errors')))
 		{
-			JError::raiseError(500, implode('<br />', $errors));
-			return false;
+			throw new \Exception(implode("\n", $errors), 500);
 		}
 
 		$this->addToolBar();
@@ -52,8 +56,8 @@ class U3ABookingViewEvent extends HtmlView
 		$isNew = ($this->item->id == 0);
 		
 		// Set the page header and glyph (https://docs.joomla.org/J3.x:Joomla_Standard_Icomoon_Fonts)
-		JToolBarHelper::title($isNew ? JText::_('COM_U3ABOOKING_EVENT_HEADING_EDIT')
-		                             : JText::_('COM_U3ABOOKING_EVENT_HEADING_NEW'), 'pencil-2');
+		ToolbarHelper::title($isNew ? Text::_('COM_U3ABOOKING_EVENT_HEADING_EDIT')
+		                             : Text::_('COM_U3ABOOKING_EVENT_HEADING_NEW'), 'pencil-2');
 									 
 		// Build the actions for new and existing records. Omit Save as Copy
 		if ($isNew)
@@ -61,28 +65,28 @@ class U3ABookingViewEvent extends HtmlView
 			// For new records, check the create permission.
 			if ($this->canDo->get('core.create')) 
 			{
-				JToolBarHelper::apply('event.apply', 'JTOOLBAR_APPLY');
-				JToolBarHelper::save('event.save', 'JTOOLBAR_SAVE');
+				ToolbarHelper::apply('event.apply', 'JTOOLBAR_APPLY');
+				ToolbarHelper::save('event.save', 'JTOOLBAR_SAVE');
 			}
-			JToolBarHelper::cancel('event.cancel', 'JTOOLBAR_CANCEL');
+			ToolbarHelper::cancel('event.cancel', 'JTOOLBAR_CANCEL');
 		}
 		else
 		{
 			if ($this->canDo->get('core.edit'))
 			{
 				// We can save the new record
-				JToolBarHelper::apply('event.apply', 'JTOOLBAR_APPLY');
-				JToolBarHelper::save('event.save', 'JTOOLBAR_SAVE');
+				ToolbarHelper::apply('event.apply', 'JTOOLBAR_APPLY');
+				ToolbarHelper::save('event.save', 'JTOOLBAR_SAVE');
  
 				// We can save this record, but check the create permission to see
 				// if we can return to make a new one.
 				if ($this->canDo->get('core.create')) 
 				{
-					JToolBarHelper::custom('event.save2new', 'save-new.png', 'save-new_f2.png',
+					ToolbarHelper::custom('event.save2new', 'save-new.png', 'save-new_f2.png',
 					                       'JTOOLBAR_SAVE_AND_NEW', false);
 				}
 			}
-			JToolBarHelper::cancel('event.cancel', 'JTOOLBAR_CLOSE');
+			ToolbarHelper::cancel('event.cancel', 'JTOOLBAR_CLOSE');
 		}
 	}
 	/**
@@ -91,9 +95,7 @@ class U3ABookingViewEvent extends HtmlView
 	protected function setDocument() 
 	{
 		$isNew = ($this->item->id < 1);
-		$document = Factory::getDocument();
-		$document->setTitle($isNew ? JText::_('COM_U3ABOOKING_EVENT_CREATING') :
-                JText::_('COM_U3ABOOKING_EVENT_EDITING'));
-		JText::script('COM_U3ABOOKING_EVENT_ERROR_UNACCEPTABLE');
+		$this->document->setTitle($isNew ? Text::_('COM_U3ABOOKING_EVENT_CREATING') :
+                Text::_('COM_U3ABOOKING_EVENT_EDITING'));
 	}
 }

@@ -7,58 +7,64 @@
 defined('_JEXEC') or die('Restricted Access');
 
 use Joomla\Registry\Registry;
+use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Layout\LayoutHelper;
+use Joomla\CMS\Router\Route;
+use Joomla\CMS\Session\Session;
 
-JHtml::_('behavior.core');
-JHtml::_('script', 'com_u3abooking/admin-events-modal.js', array('version' => 'auto', 'relative' => true));
+HTMLHelper::_('behavior.core');
+HTMLHelper::_('script', 'com_u3abooking/admin-events-modal.js', array('version' => 'auto', 'relative' => true));
 
 $listOrder     = $this->escape($this->state->get('list.ordering'));
 $listDirn      = $this->escape($this->state->get('list.direction'));
 
-$app = JFactory::getApplication();
+$app = Factory::getApplication();
 $function  = $app->input->getCmd('function', 'jSelectEvent');
 $onclick   = $this->escape($function);
 ?>
 <div class="container-popup">
     
-<form action="<?php echo JRoute::_('index.php?option=com_u3abooking&view=events&layout=modal&tmpl=component&function=' . $function . '&' . JSession::getFormToken() . '=1'); ?>" method="post" name="adminForm" id="adminForm" class="form-inline">
+<form action="<?php echo Route::_('index.php?option=com_u3abooking&view=events&layout=modal&tmpl=component&function=' . $function . '&' . Session::getFormToken() . '=1'); ?>" method="post" name="adminForm" id="adminForm" class="form-inline">
 
-	<?php echo JLayoutHelper::render('joomla.searchtools.default', array('view' => $this)); ?>
+	<?php echo LayoutHelper::render('joomla.searchtools.default', array('view' => $this)); ?>
     
     <div class="clearfix"></div>
 
         <table class="table table-striped table-hover">
             <thead>
             <tr>
-                <th width="3%"><?php echo JText::_('COM_U3ABOOKING_EVENTS_NUM'); ?></th>
+                <th width="3%"><?php echo Text::_('COM_U3ABOOKING_EVENTS_NUM'); ?></th>
                 <th width="25%">
-                    <?php echo JHtml::_('searchtools.sort', 'COM_U3ABOOKING_EVENTS_TITLE', 'title', $listDirn, $listOrder); ?>
+                    <?php echo HTMLHelper::_('searchtools.sort', 'COM_U3ABOOKING_EVENTS_TITLE', 'title', $listDirn, $listOrder); ?>
                 </th>
 				<th width="15%">
-                    <?php echo JHtml::_('searchtools.sort', 'COM_U3ABOOKING_EVENTS_VENUE', 'venue', $listDirn, $listOrder); ?>
+                    <?php echo HTMLHelper::_('searchtools.sort', 'COM_U3ABOOKING_EVENTS_VENUE', 'venue', $listDirn, $listOrder); ?>
                 </th>
 				<th width="20%">
-                    <?php echo JHtml::_('searchtools.sort', 'COM_U3ABOOKING_EVENTS_DATETIME', 'event_start', $listDirn, $listOrder); ?>
+                    <?php echo HTMLHelper::_('searchtools.sort', 'COM_U3ABOOKING_EVENTS_DATETIME', 'event_start', $listDirn, $listOrder); ?>
                 </th>
 				<th width="6%">
-                    <?php echo JText::_('COM_U3ABOOKING_EVENTS_CAPACITY'); ?>
+                    <?php echo Text::_('COM_U3ABOOKING_EVENTS_CAPACITY'); ?>
                 </th>
 				<th width="6%">
-                    <?php echo JText::_('JCATEGORY'); ?>
+                    <?php echo Text::_('JCATEGORY'); ?>
                 </th>
                 <th width="6%">
-                    <?php echo JHtml::_('searchtools.sort',  'JGRID_HEADING_ACCESS', 'access', $listDirn, $listOrder); ?>
+                    <?php echo HTMLHelper::_('searchtools.sort',  'JGRID_HEADING_ACCESS', 'access', $listDirn, $listOrder); ?>
                 </th>
                 <th width="6%">
-                    <?php echo JHtml::_('searchtools.sort', 'COM_U3ABOOKING_EVENTS_ORGANISER', 'organiser', $listDirn, $listOrder); ?>
+                    <?php echo HTMLHelper::_('searchtools.sort', 'COM_U3ABOOKING_EVENTS_ORGANISER', 'organiser', $listDirn, $listOrder); ?>
                 </th>
                 <th width="6%">
-                    <?php echo JHtml::_('searchtools.sort', 'COM_U3ABOOKING_EVENTS_CREATED_DATE', 'created', $listDirn, $listOrder); ?>
+                    <?php echo HTMLHelper::_('searchtools.sort', 'COM_U3ABOOKING_EVENTS_CREATED_DATE', 'created', $listDirn, $listOrder); ?>
                     </th>
                 <th width="5%">
-                    <?php echo JText::_('COM_U3ABOOKING_EVENTS_STATE'); ?>
+                    <?php echo Text::_('COM_U3ABOOKING_EVENTS_STATE'); ?>
                 </th>
                 <th width="2%">
-                    <?php echo JHtml::_('searchtools.sort', 'COM_U3ABOOKING_EVENTS_ID', 'id', $listDirn, $listOrder); ?>
+                    <?php echo HTMLHelper::_('searchtools.sort', 'COM_U3ABOOKING_EVENTS_ID', 'id', $listDirn, $listOrder); ?>
                 </th>
             </tr>
             </thead>
@@ -87,7 +93,7 @@ $onclick   = $this->escape($function);
                                     <?php echo $this->escape($row->title); ?>
                                 </a>
                                 <span class="small break-word">
-                                	<?php echo JText::sprintf('JGLOBAL_LIST_ALIAS', $this->escape($row->alias)); ?>
+                                	<?php echo Text::sprintf('JGLOBAL_LIST_ALIAS', $this->escape($row->alias)); ?>
                                 </span>
                             </td>
                             <td align="center">
@@ -113,7 +119,7 @@ $onclick   = $this->escape($function);
                                 <?php echo substr($row->created, 0, 10); ?>
                             </td>
                             <td align="center">
-                                <?php echo JHtml::_('jgrid.published', $row->published, $i, 'events.', true, 'cb'); ?>
+                                <?php echo HTMLHelper::_('jgrid.published', $row->published, $i, 'events.', true, 'cb'); ?>
                             </td>
                             <td align="center">
                                 <?php echo $row->id; ?>
@@ -125,6 +131,6 @@ $onclick   = $this->escape($function);
         </table>
         <input type="hidden" name="task" value=""/>
         <input type="hidden" name="boxchecked" value="0"/>
-        <?php echo JHtml::_('form.token'); ?>
+        <?php echo HTMLHelper::_('form.token'); ?>
 </form>
 </div>

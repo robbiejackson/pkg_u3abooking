@@ -1,15 +1,19 @@
 <?php
+namespace Robbie\Component\U3ABooking\Administrator\Table;
 
 defined('_JEXEC') or die('Restricted access');
 
 use Joomla\CMS\Table\Table;
 use Joomla\CMS\Factory; 
+use Joomla\CMS\Filter\OutputFilter;
+use Joomla\CMS\Language\Text;
 
-class U3ABookingTableEvent extends Table
+
+class EventTable extends Table
 {
 	function __construct(&$db)
 	{
-		parent::__construct('#__u3a_event', 'id', $db);
+        parent::__construct('#__u3a_event', 'id', $db);
 	}
 
 	public function check()
@@ -20,7 +24,7 @@ class U3ABookingTableEvent extends Table
 		{
 			$this->alias = $this->title;
 		}
-		$this->alias = JFilterOutput::stringURLSafe($this->alias);
+		$this->alias = OutputFilter::stringURLSafe($this->alias);
 		return true;
 	}
 
@@ -33,7 +37,7 @@ class U3ABookingTableEvent extends Table
 	public function store($updateNulls = false)
 	{
 		$date = Factory::getDate();
-		$user = Factory::getUser();
+		$user = Factory::getApplication()->getIdentity();
 
 		if (!$this->id)
 		{
@@ -49,11 +53,11 @@ class U3ABookingTableEvent extends Table
 		}
 
 		// Verify that the alias is unique
-		$table = Table::getInstance('Event', 'U3ABookingTable', array('dbo' => $this->getDbo()));
+		$table = new EventTable($this->_db);
 
 		if ($table->load(array('alias' => $this->alias)) && ($table->id != $this->id || $this->id == 0))
 		{
-			$this->setError(\JText::_('COM_U3ABOOKING_ERROR_NONUNIQUE_ALIAS'));
+			$this->setError(Text::_('COM_U3ABOOKING_ERROR_NONUNIQUE_ALIAS'));
 			return false;
 		}
 

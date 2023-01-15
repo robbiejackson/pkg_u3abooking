@@ -1,4 +1,5 @@
 <?php
+namespace Robbie\Component\U3ABooking\Administrator\Model;
 
 defined('_JEXEC') or die('Restricted access');
 
@@ -14,17 +15,8 @@ use Joomla\CMS\Log\Log;
  * Model which handles actions in the Admin Bookings form and Admin Edit Booking
  *
  */
-class U3ABookingModelBooking extends AdminModel
+class BookingModel extends AdminModel
 {
-
-	/**
-	 * Method to get the U3A Booking Booking table object
-	 */
-	 
-	public function getTable($type = 'Booking', $prefix = 'U3ABookingTable', $config = array())
-	{
-		return Table::getInstance($type, $prefix, $config);
-	}
 
 	/**
 	 * Method to get the record form.
@@ -126,7 +118,7 @@ class U3ABookingModelBooking extends AdminModel
 		$row = array('Id', 'Booking ref', 'Telephone', 'Email address', 'Tickets', 'Attendees', 'Special requirements', 'Booking date');
 		fputcsv($f, $row);
 		
-		$db = Factory::getDbo();
+		$db = $this->getDatabase();
 		$query = $db->getQuery(true);
 
 		$query->select('id, CONCAT(id,booking_ref_part) AS booking_ref, telephone, email, num_tickets, attendees, special_requirements, created')
@@ -154,8 +146,4 @@ class U3ABookingModelBooking extends AdminModel
 		return true;
 	}
 
-	protected function cleanCache($group = null, $client_id = 0)
-	{
-		parent::cleanCache('com_u3abooking');
-	}
 }

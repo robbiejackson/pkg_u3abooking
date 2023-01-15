@@ -1,4 +1,5 @@
 <?php
+namespace Robbie\Component\U3ABooking\Administrator\Model;
 
 defined('_JEXEC') or die('Restricted access');
 use Joomla\CMS\MVC\Model\ListModel;
@@ -8,7 +9,7 @@ use Joomla\CMS\Factory;
  * List Model for displaying the Events on the Admin Events form
  *
  */
-class U3ABookingModelEvents extends ListModel
+class EventsModel extends ListModel
 {
 	public function __construct($config = array())
 	{
@@ -52,9 +53,9 @@ class U3ABookingModelEvents extends ListModel
 	protected function getListQuery()
 	{
 		// Initialize variables.
-		$db    = Factory::getDbo();
+		$db = $this->getDatabase();
 		$query = $db->getQuery(true);
-		$user = Factory::getUser();
+		$user = Factory::getApplication()->getIdentity();
 		
 		// Create the base select statement.
 		$query->select('e.id as id, e.title as title, e.venue as venue, e.event_start as event_start, e.event_end as event_end,

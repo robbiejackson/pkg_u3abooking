@@ -1,10 +1,11 @@
 <?php
+namespace Robbie\Component\U3ABooking\Administrator\Table;
 
 defined('_JEXEC') or die('Restricted access');
 
 use Joomla\CMS\Table\Table;
 
-class U3ABookingTableBooking extends Table
+class BookingTable extends Table
 {
 	function __construct(&$db)
 	{

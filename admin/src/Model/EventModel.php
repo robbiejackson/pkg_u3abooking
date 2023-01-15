@@ -1,4 +1,5 @@
 <?php
+namespace Robbie\Component\U3ABooking\Administrator\Model;
 
 defined('_JEXEC') or die('Restricted access');
 
@@ -12,17 +13,8 @@ use Joomla\CMS\Log\Log;
  * Model which handles actions in the Admin Events form and Admin Edit Event
  *
  */
-class U3ABookingModelEvent extends AdminModel
+class EventModel extends AdminModel
 {
-
-	/**
-	 * Method to get the U3A Booking Event table object
-	 */
-	 
-	public function getTable($type = 'Event', $prefix = 'U3ABookingTable', $config = array())
-	{
-		return Table::getInstance($type, $prefix, $config);
-	}
 
 	/**
 	 * Method to get the record form.
@@ -94,7 +86,7 @@ class U3ABookingModelEvent extends AdminModel
 	
 	public function reserveTickets($eventid, $num_tickets, $forceReserve = false)
 	{
-		$db = Factory::getDbo(); 
+		$db = $this->getDatabase();
 		try
 		{
 			$db->transactionStart();
@@ -148,11 +140,11 @@ class U3ABookingModelEvent extends AdminModel
 			
 			return $places_allocated; 
 		}
-		catch (Exception $e)
+		catch (\Exception $e)
 		{
 			// catch any database errors.
 			$db->transactionRollback();
-			JErrorPage::render($e);
+            throw new \Exception(implode("\n", $e), 500);
 		}
 	}
 	
@@ -163,7 +155,7 @@ class U3ABookingModelEvent extends AdminModel
 	
 	public function unreserveTickets($eventid, $num_tickets)
 	{
-		$db = Factory::getDbo(); 
+		$db = $this->getDatabase();
 		try
 		{
 			$db->transactionStart();
@@ -201,11 +193,11 @@ class U3ABookingModelEvent extends AdminModel
 			
 			return true; 
 		}
-		catch (Exception $e)
+		catch (\Exception $e)
 		{
 			// catch any database errors.
 			$db->transactionRollback();
-			JErrorPage::render($e);
+            throw new \Exception(implode("\n", $e), 500);
 		}
 	}
 	
@@ -230,8 +222,4 @@ class U3ABookingModelEvent extends AdminModel
 		}
 	}
 
-	protected function cleanCache($group = null, $client_id = 0)
-	{
-		parent::cleanCache('com_u3abooking');
-	}
 }

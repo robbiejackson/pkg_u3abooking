@@ -1,4 +1,6 @@
 <?php
+namespace Robbie\Component\U3ABooking\Administrator\View\Booking;
+
 /**
  * View which provides the form for editing a booking
  */

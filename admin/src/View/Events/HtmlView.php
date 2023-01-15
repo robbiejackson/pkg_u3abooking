@@ -1,13 +1,18 @@
 <?php
+namespace Robbie\Component\U3ABooking\Administrator\View\Events;
+
 /**
  * This is the view file which collates the items to display on the Admin Events form
  */
 
 defined('_JEXEC') or die('Restricted access');
-use Joomla\CMS\MVC\View\HtmlView;
+use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Helper\ContentHelper;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Toolbar\ToolbarHelper;
 
-class U3ABookingViewEvents extends HtmlView
+class HtmlView extends BaseHtmlView 
 {
 	/**
 	 * Display the Events view
@@ -24,20 +29,19 @@ class U3ABookingViewEvents extends HtmlView
 		$this->filterForm    	= $this->get('FilterForm');
 		$this->activeFilters 	= $this->get('ActiveFilters');
         
-		$this->canDo = JHelperContent::getActions('com_u3abooking');
+		$this->canDo = ContentHelper::getActions('com_u3abooking');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))
 		{
-			JError::raiseError(500, implode('<br />', $errors));
+            throw new \Exception(implode("\n", $errors), 500);
 
 			return false;
 		}
         
-        // Set the sidebar submenu and toolbar, but not on the modal window
+        // Set the toolbar, but not on the modal window
 		if ($this->getLayout() !== 'modal')
 		{
-			U3ABookingHelper::addSubmenu('events');
 			$this->addToolBar();
 		}
 
@@ -55,49 +59,30 @@ class U3ABookingViewEvents extends HtmlView
 	 */
 	protected function addToolBar()
 	{
-		$title = JText::_('COM_U3ABOOKING_EVENTS_TITLE');
-		
-		$bar = JToolbar::getInstance('toolbar');
-	
-		JToolBarHelper::title($title);
+		ToolbarHelper::title(Text::_('COM_U3ABOOKING_EVENTS_TITLE'));
 		if ($this->canDo->get('core.create')) 
 		{
-			JToolBarHelper::addNew('event.add', 'JTOOLBAR_NEW');
+			ToolbarHelper::addNew('event.add', 'JTOOLBAR_NEW');
 		}
 		if ($this->canDo->get('core.edit')) 
 		{
-			JToolBarHelper::editList('event.edit', 'JTOOLBAR_EDIT');
+			ToolbarHelper::editList('event.edit', 'JTOOLBAR_EDIT');
 		}
 		if ($this->canDo->get('core.edit.state'))
 		{
-			JToolbarHelper::publish('events.publish', 'JTOOLBAR_PUBLISH', true);
-			JToolbarHelper::unpublish('events.unpublish', 'JTOOLBAR_UNPUBLISH', true);
-			JToolbarHelper::checkin('events.checkin');
+			ToolbarHelper::publish('events.publish', 'JTOOLBAR_PUBLISH', true);
+			ToolbarHelper::unpublish('events.unpublish', 'JTOOLBAR_UNPUBLISH', true);
+			ToolbarHelper::checkin('events.checkin');
 		}
 		if ($this->state->get('filter.published') == -2 && $this->canDo->get('core.delete'))
 		{
-			JToolbarHelper::deleteList('COM_U3ABOOKING_EVENTS_CONFIRM_DELETE', 'events.delete', 'JTOOLBAR_EMPTY_TRASH');
+			ToolbarHelper::deleteList('COM_U3ABOOKING_EVENTS_CONFIRM_DELETE', 'events.delete', 'JTOOLBAR_EMPTY_TRASH');
 		}
 		elseif ($this->canDo->get('core.edit.state'))
 		{
-			JToolbarHelper::trash('events.trash');
+			ToolbarHelper::trash('events.trash');
 		}
-		// Add a batch button
-		/*
-		if ($this->canDo->get('core.create') && $this->canDo->get('core.edit')
-				&& $this->canDo->get('core.edit.state'))
-		{
-				// we use a standard Joomla layout to get the html for the batch button
-				$layout = new JLayoutFile('joomla.toolbar.batch');
-				$batchButtonHtml = $layout->render(array('title' => JText::_('JTOOLBAR_BATCH')));
-				$bar->appendButton('Custom', $batchButtonHtml, 'batch');
-		}
-		if ($this->canDo->get('core.admin')) 
-		{
-			JToolBarHelper::divider();
-			JToolBarHelper::preferences('com_u3abooking');
-		}
-		*/
+
 	}
 	/**
 	 * Method to set up the document properties
@@ -106,7 +91,6 @@ class U3ABookingViewEvents extends HtmlView
 	 */
 	protected function setDocument() 
 	{
-		$document = Factory::getDocument();
-		$document->setTitle(JText::_('COM_U3ABOOKING_ADMINISTRATION_EVENTS'));
+		$this->document->setTitle(Text::_('COM_U3ABOOKING_ADMINISTRATION_EVENTS'));
 	}
 }

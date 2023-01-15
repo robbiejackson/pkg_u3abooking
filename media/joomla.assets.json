@@ -1,0 +1,31 @@
+{
+  "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+  "name": "com_u3abooking",
+  "version": "1.0.0",
+  "description": "U3A event booking",
+  "license": "GPL-2.0-or-later",
+  "assets": [
+    {
+      "name": "com_u3abooking.bookingref",
+      "type": "script",
+      "uri": "com_u3abooking/bookingref.js",
+      "dependencies": [
+        "form.validate", "jquery"
+      ],
+      "attributes": {
+        "defer": true
+      }
+    } ,
+    {
+      "name": "com_u3abooking.admin-events-modal",
+      "type": "script",
+      "uri": "com_u3abooking/admin-events-modal.js",
+      "dependencies": [
+        "field.modal-fields", "jquery"
+      ],
+      "attributes": {
+        "defer": true
+      }
+    } 
+  ]
+}

@@ -38,7 +38,7 @@
 	</files>
 
 	<languages folder="site/language">
-		<language tag="en-GB">en-GB/en-GB.com_u3abooking.ini</language>
+		<language tag="en-GB">en-GB/com_u3abooking.ini</language>
     </languages>
 	
     <media destination="com_u3abooking" folder="media">
@@ -55,13 +55,14 @@
 		<files folder="admin">
 			<filename>access.xml</filename>
 			<folder>forms</folder>
+            <folder>services</folder>
             <folder>sql</folder>
             <folder>src</folder>
             <folder>tmpl</folder>
         </files>
         <languages folder="admin/language">
-			<language tag="en-GB">en-GB/en-GB.com_u3abooking.sys.ini</language>
-            <language tag="en-GB">en-GB/en-GB.com_u3abooking.ini</language>
+			<language tag="en-GB">en-GB/com_u3abooking.sys.ini</language>
+            <language tag="en-GB">en-GB/com_u3abooking.ini</language>
 		</languages>
 	</administration>
 

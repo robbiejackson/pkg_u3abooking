@@ -8,7 +8,7 @@ class com_U3ABookingInstallerScript extends InstallerScript
 {
 	public function update($parent) 
     {
-        echo '<p>' . JText::sprintf('COM_U3ABOOKING_UPDATE_TEXT', $parent->get('manifest')->version) . '</p>';
+        //echo '<p>' . JText::sprintf('COM_U3ABOOKING_UPDATE_TEXT', $parent->get('manifest')->version) . '</p>';
     }
 
 	public function postflight($type, $parent)

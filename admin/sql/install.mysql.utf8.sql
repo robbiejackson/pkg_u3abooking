@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `#__u3a_event` (
   KEY `idx_state` (`published`),
   KEY `idx_created_user_id` (`created_by`),
   KEY `idx_access` (`access`),
-  KEY `idx_alias` (`alias`)
+  KEY `idx_alias` (`alias`(100))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `#__u3a_booking` (
