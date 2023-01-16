@@ -23,26 +23,21 @@ $tmpl = $input->getCmd('tmpl', '') === 'component' ? '&tmpl=component' : '';
     
     <div class="form-horizontal">
 
-	<?php echo LayoutHelper::render('joomla.edit.title_alias', $this); ?>
-	
-    <?php echo Text::_('bootstrap.startTabSet', 'myTab', array('active' => 'details')); ?>
-    <?php echo Text::_('bootstrap.addTab', 'myTab', 'details', Text::_('COM_U3ABOOKING_BOOKING_DETAILS')); ?>
+        <?php echo LayoutHelper::render('joomla.edit.title_alias', $this); ?>
+
         <fieldset class="adminform">
-            <div class="row-fluid">
-                <div class="span6">
+            <div class="row">
+                <div class="col-lg-6">
                     <?php echo $this->form->renderFieldset('booking_details');  ?>
                 </div>
-				<div class="span6">
+                <div class="col-lg-6">
                     <?php echo $this->form->renderFieldset('options');  ?>
                 </div>
             </div>
         </fieldset>
-    <?php echo Text::_('bootstrap.endTab'); ?>
-
-    <?php echo Text::_('bootstrap.endTabSet'); ?>
 
     </div>
 	
-    <input type="hidden" name="task" value="event.edit" />
+    <input type="hidden" name="task" value="" />
     <?php echo Text::_('form.token'); ?>
 </form>
