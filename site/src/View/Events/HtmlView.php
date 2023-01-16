@@ -1,13 +1,14 @@
 <?php
+namespace Robbie\Component\U3ABooking\Site\View\Events;
 /**
  * View for displaying the events and allowing the user to click on one to get to the booking form
  */
  
 defined('_JEXEC') or die('Restricted access');
-use Joomla\CMS\MVC\View\HtmlView;
+use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 use Joomla\CMS\Factory;
 
-class U3ABookingViewEvents extends HtmlView
+class HtmlView extends BaseHtmlView 
 {
 	/**
 	 * Display the event and form for booking

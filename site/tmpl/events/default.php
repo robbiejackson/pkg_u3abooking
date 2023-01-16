@@ -7,6 +7,7 @@
 defined('_JEXEC') or die('Restricted Access');
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\Router\Route;
 
 ?>
 <?php if (empty($this->items)) : ?>
@@ -48,7 +49,7 @@ use Joomla\CMS\Factory;
 				<?php echo $startDate . $startTime . ' - ' . ($sameDate ? $endTime : $endDate . $endTime); ?>
 			</td>
 			<td align="center">
-				<?php $link = JRoute::_('index.php?option=com_u3abooking&view=booking&layout=add&eventid=' . $row->id); ?>
+				<?php $link = Route::_('index.php?option=com_u3abooking&view=booking&layout=add&eventid=' . $row->id); ?>
 				<a href="<?php echo $link; ?>" title="Click to book places on this event">
                     <?php echo $row->title; ?>
                 </a>

@@ -1,17 +1,18 @@
 <?php
+namespace Robbie\Component\U3ABooking\Site\Model;
 /**
  * Model for get an individual event for booking
  */
 
 defined('_JEXEC') or die('Restricted access');
 use Joomla\CMS\MVC\Model\AdminModel;
+use Joomla\CMS\Form\Form;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Date\Date;
 use Joomla\CMS\Table\Table;
+use Joomla\CMS\Language\Text;
 
-//JLoader::register('HelloworldHelperRoute', JPATH_ROOT . '/components/com_helloworld/helpers/route.php');
-
-class U3ABookingModelBooking extends AdminModel
+class BookingModel extends AdminModel
 {
 
 	private $bookingTable;
@@ -19,13 +20,6 @@ class U3ABookingModelBooking extends AdminModel
 	protected function populateState()
 	{
 		parent::populateState();
-	}
-
-	// Use the U3A Booking table
-	public function getTable($type = 'Booking', $prefix = 'U3ABookingTable', $config = array())
-	{
-		$this->bookingTable = Table::getInstance($type, $prefix, $config);
-		return $this->bookingTable;
 	}
 	
 	public function getBookingRecordId()
@@ -49,7 +43,7 @@ class U3ABookingModelBooking extends AdminModel
 				return null;
 			}
 			
-			$db = Factory::getDbo();
+			$db = $this->getDatabase();
 
 			$query = $db->getQuery(true);
 			$query->select('b.id as id, b.event_id as event_id, b.booking_ref_part as booking_ref_part, concat(b.id, b.booking_ref_part) as booking_ref,
@@ -80,7 +74,7 @@ class U3ABookingModelBooking extends AdminModel
 		if (empty($form))
 		{
             $errors = $this->getErrors();
-			throw new Exception(implode("\n", $errors), 500);
+			throw new \Exception(implode("\n", $errors), 500);
 		}
 
 		return $form;
@@ -92,7 +86,7 @@ class U3ABookingModelBooking extends AdminModel
 		// Check the session for previously entered form data.
 		$app = Factory::getApplication();
 		$layout = $app->input->get('layout', '');
-		$data = JFactory::getApplication()->getUserState(
+		$data = Factory::getApplication()->getUserState(
 			"com_u3abooking.$layout.booking.data",
 			array()
 		);
@@ -122,7 +116,7 @@ class U3ABookingModelBooking extends AdminModel
 	 * This just sets the max number of tickets that an individual can book on this event
 	 * The state variable is set in the view.html.php file
 	 */
-	protected function preprocessForm(JForm $form, $data, $group = 'event')
+	protected function preprocessForm(Form $form, $data, $group = 'event')
 	{
 		$form->setFieldAttribute("num_tickets", "max", $this->getState('event.max_tickets_per_booking'));
 	}
@@ -138,11 +132,11 @@ class U3ABookingModelBooking extends AdminModel
 		$data = parent::validate($form, $data, $group);
 		if ($data)  // no validation errors from Joomla validation
 		{
-			$eventTable = Table::getInstance('Event', 'U3ABookingTable');
+			$eventTable = getTable('Event');
 			$eventTable->load($data["event_id"]);
 			if ($data['num_tickets'] > $eventTable->max_tickets_per_booking)
 			{
-				$this->setError(JText::_('COM_U3ABOOKING_TOO_MANY_TICKETS_BOOKED'), 'error');
+				$this->setError(Text::_('COM_U3ABOOKING_TOO_MANY_TICKETS_BOOKED'), 'error');
 				return false;
 			}
 			return $data;
@@ -159,7 +153,7 @@ class U3ABookingModelBooking extends AdminModel
 	{
 		foreach ($pks as $i => $id)
 		{
-			$db = Factory::getDbo();
+			$db = $this->getDatabase();
 
 			$query = $db->getQuery(true);
 

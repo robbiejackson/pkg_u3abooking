@@ -1,4 +1,5 @@
 <?php
+namespace Robbie\Component\U3ABooking\Site\Controller;
 /**
  * @package     Joomla.Site
  * @subpackage  com_helloworld
@@ -8,12 +9,16 @@
  */
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
+use Joomla\CMS\MVC\Controller\FormController;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Table\Table;
 use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 use Joomla\CMS\Log\Log;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Uri\Uri;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Log\Log;
+use Joomla\CMS\Session\Session;
 
 /**
  * HelloWorld Controller
@@ -25,7 +30,7 @@ use Joomla\CMS\Uri\Uri;
  * users to enter a new helloworld message
  *
  */
-class U3ABookingControllerBooking extends JControllerForm
+class BookingController extends FormController
 {   
 	public function cancel($key = null)
     {
@@ -40,7 +45,7 @@ class U3ABookingControllerBooking extends JControllerForm
         // set up the redirect to the site home page
         $this->setRedirect(
             (string)Uri::root(), 
-            JText::_(COM_U3ABOOKING_AMENDMENT_CANCELLED)
+            Text::_(COM_U3ABOOKING_AMENDMENT_CANCELLED)
 		);
     }
 	
@@ -57,7 +62,7 @@ class U3ABookingControllerBooking extends JControllerForm
         // set up the redirect to the site home page
         $this->setRedirect(
             (string)Uri::root(), 
-            JText::_(COM_U3ABOOKING_ADD_CANCELLED)
+            Text::_(COM_U3ABOOKING_ADD_CANCELLED)
 		);
 	}
 	
@@ -81,7 +86,7 @@ class U3ABookingControllerBooking extends JControllerForm
 		{	// use the site home page as the redirect URL
 			$returnUrl = (string)Uri::root();
 		}
-        $this->setRedirect($returnUrl, JText::_(COM_U3ABOOKING_AMENDMENT_CANCELLED));
+        $this->setRedirect($returnUrl, Text::_(COM_U3ABOOKING_AMENDMENT_CANCELLED));
 	}
 	
     /*
@@ -91,7 +96,7 @@ class U3ABookingControllerBooking extends JControllerForm
     public function add($key = null, $urlVar = null)
     {
 		// Check for request forgeries.
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		Session::checkToken();
         
 		$app = Factory::getApplication(); 
 		$input = $app->input; 
@@ -100,7 +105,7 @@ class U3ABookingControllerBooking extends JControllerForm
                
 		// Get the current URI to set in redirects. As we're handling a POST, 
 		// this URI comes from the <form action="..."> attribute in the layout file above
-		$currentUri = (string)JUri::getInstance();
+		$currentUri = (string)Uri::getInstance();
        
 		// get the data from the HTTP POST request
 		$data  = $input->get('jform', array(), 'array');
@@ -117,7 +122,7 @@ class U3ABookingControllerBooking extends JControllerForm
 		
 		if (!in_array($event->access, $userAccessLevels))
 		{
-			$app->enqueueMessage(JText::_('JERROR_ALERTNOAUTHOR'), 'error');
+			$app->enqueueMessage(Text::_('JERROR_ALERTNOAUTHOR'), 'error');
 			$app->setHeader('status', 403, true);
 
 			return;
@@ -202,7 +207,7 @@ class U3ABookingControllerBooking extends JControllerForm
 		if (!$model->save($validData))
 		{
             // Handle the case where the save failed - redirect back to the edit form
-			$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_SAVE_FAILED', $model->getError()));
+			$this->setError(Text::sprintf('JLIB_APPLICATION_ERROR_SAVE_FAILED', $model->getError()));
 			$this->setMessage($this->getError(), 'error');
 			$this->setRedirect($currentUri);
 			
@@ -231,7 +236,7 @@ class U3ABookingControllerBooking extends JControllerForm
 	public function amend($key = null, $urlVar = null)
     {
 		// Check for request forgeries.
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		Session::checkToken();
         
 		$app = Factory::getApplication(); 
 		$input = $app->input; 
@@ -240,7 +245,7 @@ class U3ABookingControllerBooking extends JControllerForm
                
 		// Get the current URI to set in redirects. As we're handling a POST, 
 		// this URI comes from the <form action="..."> attribute in the layout file above
-		$currentUri = (string)JUri::getInstance();
+		$currentUri = (string)Uri::getInstance();
        
 		// get the data from the HTTP POST request
 		$data  = $input->get('jform', array(), 'array');
@@ -250,7 +255,7 @@ class U3ABookingControllerBooking extends JControllerForm
 		$existingBooking = $model->getItem($data['id']);
 		if ($data['booking_ref_part'] != $existingBooking->booking_ref_part)
 		{
-			$this->setRedirect($currentUri, JText::_('COM_U3ABOOKING_INVALID_BOOKING_REFERENCE'), 'error');
+			$this->setRedirect($currentUri, Text::_('COM_U3ABOOKING_INVALID_BOOKING_REFERENCE'), 'error');
 			return false;
 		}
 
@@ -334,7 +339,7 @@ class U3ABookingControllerBooking extends JControllerForm
 		if (!$model->save($validData))
 		{
             // Handle the case where the save failed - redirect back to the edit form
-			$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_SAVE_FAILED', $model->getError()));
+			$this->setError(Text::sprintf('JLIB_APPLICATION_ERROR_SAVE_FAILED', $model->getError()));
 			$this->setMessage($this->getError(), 'error');
 			$this->setRedirect($currentUri);
 			
@@ -370,7 +375,7 @@ class U3ABookingControllerBooking extends JControllerForm
 		// where someone nasty just does a curl to this URL passing the id alone.
 	
 		// Check for request forgeries.
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		Session::checkToken();
         
 		$app = Factory::getApplication(); 
 		$input = $app->input; 
@@ -379,7 +384,7 @@ class U3ABookingControllerBooking extends JControllerForm
 		
 		// Get the current URI to set in redirects. As we're handling a POST, 
 		// this URI comes from the <form action="..."> attribute in the layout file above
-		$currentUri = (string)JUri::getInstance();
+		$currentUri = (string)Uri::getInstance();
        
 		// get the data from the HTTP POST request
 		$data  = $input->get('jform', array(), 'array');
@@ -389,7 +394,7 @@ class U3ABookingControllerBooking extends JControllerForm
 		$existingBooking = $model->getItem($data['id']);
 		if ($data['booking_ref_part'] != $existingBooking->booking_ref_part)
 		{
-			$this->setRedirect($currentUri, JText::_('COM_U3ABOOKING_INVALID_BOOKING_REFERENCE'), 'error');
+			$this->setRedirect($currentUri, Text::_('COM_U3ABOOKING_INVALID_BOOKING_REFERENCE'), 'error');
 			return false;
 		}
 		
@@ -404,7 +409,7 @@ class U3ABookingControllerBooking extends JControllerForm
 		
 		// set up the redirect to the add booking page
 		$addBookingPage = Route::_("index.php?option=com_u3abooking&view=booking&layout=add&eventid=" . $existingBooking->event_id, false, Route::TLS_DISABLE, true);
-        $this->setRedirect($addBookingPage, JText::_(COM_U3ABOOKING_DELETE_SUCCESSFUL));
+        $this->setRedirect($addBookingPage, Text::_(COM_U3ABOOKING_DELETE_SUCCESSFUL));
 		return true;
 	}
 	
@@ -441,21 +446,21 @@ class U3ABookingControllerBooking extends JControllerForm
 		}
 		catch (Exception $e)
 		{
-			JLog::add('Send email exception: ' . $e->getMessage(), JLog::Error, 'u3a-error');
+			Log::add('Send email exception: ' . $e->getMessage(), Log::Error, 'u3a-error');
 		}
 	}
 	
 	public function find($key = null, $urlVar = null)
     {
 		// Check for request forgeries.
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		Session::checkToken();
 		
 		// get the data from the HTTP POST request
 		$app = Factory::getApplication(); 
 		$input = $app->input; 
 		$data = $input->get('jform', array(), 'array');
 		
-		$currentUri = (string)JUri::getInstance();
+		$currentUri = (string)Uri::getInstance();
 		
 		// analyse the booking reference entered
 		// it should be of the form:     id/booking_ref_part   but remove any whitespace (from copy/paste from email)
@@ -481,13 +486,13 @@ class U3ABookingControllerBooking extends JControllerForm
 			}
 			else
 			{
-				$this->setRedirect($currentUri, JText::_('COM_U3ABOOKING_INVALID_BOOKING_REFERENCE'), 'warning');
+				$this->setRedirect($currentUri, Text::_('COM_U3ABOOKING_INVALID_BOOKING_REFERENCE'), 'warning');
 				return false;
 			}
 		}
 		else
 		{
-			$this->setRedirect($currentUri, JText::_('COM_U3ABOOKING_INVALID_BOOKING_REFERENCE_FORMAT'), 'error');
+			$this->setRedirect($currentUri, Text::_('COM_U3ABOOKING_INVALID_BOOKING_REFERENCE_FORMAT'), 'error');
 			return false;
 		}
 	}

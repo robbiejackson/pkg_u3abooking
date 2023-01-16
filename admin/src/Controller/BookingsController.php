@@ -6,6 +6,7 @@ use Joomla\CMS\MVC\Controller\AdminController;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Session\Session;
 use Joomla\CMS\Uri\Uri;
+use Joomla\CMS\Language\Text;
 
 /**
  * Controller handling operations on multiple booking records
@@ -37,7 +38,7 @@ class BookingsController extends AdminController
 		$filters  = $input->get('filter', array(), 'array');
 		if (!$filters['event_id'])
 		{
-			$this->setRedirect($currentUri, JText::_('COM_U3ABOOKING_SELECT_EVENT'), 'warning');
+			$this->setRedirect($currentUri, Text::_('COM_U3ABOOKING_SELECT_EVENT'), 'warning');
 			return false;
 		}
 		

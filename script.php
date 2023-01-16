@@ -3,12 +3,13 @@ defined('_JEXEC') or die();
 
 use Joomla\CMS\Installer\InstallerScript;
 use Joomla\CMS\Table\Table;
+use Joomla\CMS\Language\Text;
 
 class com_U3ABookingInstallerScript extends InstallerScript
 {
 	public function update($parent) 
     {
-        //echo '<p>' . JText::sprintf('COM_U3ABOOKING_UPDATE_TEXT', $parent->get('manifest')->version) . '</p>';
+        //echo '<p>' . Text::sprintf('COM_U3ABOOKING_UPDATE_TEXT', $parent->get('manifest')->version) . '</p>';
     }
 
 	public function postflight($type, $parent)

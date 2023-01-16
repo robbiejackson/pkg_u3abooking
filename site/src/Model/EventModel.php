@@ -1,4 +1,5 @@
 <?php
+namespace Robbie\Component\U3ABooking\Site\Model;
 /**
  * Model for get an individual event for booking
  */
@@ -28,12 +29,6 @@ class U3ABookingModelEvent extends ItemModel
 		$this->setState('u3aevent.id', $id);
 		
 		parent::populateState();
-	}
-
-	// Use the U3A Event table
-	public function getTable($type = 'Event', $prefix = 'U3ABookingTable', $config = array())
-	{
-		return JTable::getInstance($type, $prefix, $config);
 	}
 
 	/**
@@ -150,11 +145,11 @@ class U3ABookingModelEvent extends ItemModel
 			
 			return $places_allocated; 
 		}
-		catch (Exception $e)
+		catch (\Exception $e)
 		{
 			// catch any database errors.
 			$db->transactionRollback();
-			JErrorPage::render($e);
+			throw new \Exception(implode("\n", $e), 500); 
 		}
 	}
 	
@@ -203,11 +198,11 @@ class U3ABookingModelEvent extends ItemModel
 			
 			return true; 
 		}
-		catch (Exception $e)
+		catch (\Exception $e)
 		{
 			// catch any database errors.
 			$db->transactionRollback();
-			JErrorPage::render($e);
+			throw new \Exception(implode("\n", $e), 500); 
 		}
 	}
 }

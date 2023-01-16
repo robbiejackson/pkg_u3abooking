@@ -12,7 +12,9 @@ use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
 
-$this->document->getWebAssetManager()->useScript('form.validate');
+$this->document->getWebAssetManager()
+    ->useScript('form.validate')
+    ->useScript('com_u3abooking.bookingref');
 
 // if &tmpl=component used on first invocation, ensure it's on subsequent ones too
 $input = Factory::getApplication()->input;

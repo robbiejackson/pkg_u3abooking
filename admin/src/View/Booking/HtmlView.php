@@ -6,10 +6,14 @@ namespace Robbie\Component\U3ABooking\Administrator\View\Booking;
  */
 
 defined('_JEXEC') or die('Restricted access');
-use Joomla\CMS\MVC\View\HtmlView;
+use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Toolbar\ToolbarHelper;
+use Joomla\CMS\Helper\ContentHelper;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Uri\Uri;
 
-class U3ABookingViewBooking extends HtmlView
+class HtmlView extends BaseHtmlView 
 {
 
 	protected $form = null;
@@ -24,11 +28,11 @@ class U3ABookingViewBooking extends HtmlView
 		$this->form = $this->get('Form');
 		$this->item = $this->get('Item');
 
-		$this->canDo = JHelperContent::getActions('com_u3abooking', 'booking', $this->item->id);
+		$this->canDo = ContentHelper::getActions('com_u3abooking', 'booking', $this->item->id);
         
 		if (count($errors = $this->get('Errors')))
 		{
-			JError::raiseError(500, implode('<br />', $errors));
+			throw new \Exception(implode("\n", $errors), 500); 
 			return false;
 		}
 
@@ -53,16 +57,16 @@ class U3ABookingViewBooking extends HtmlView
 		$isNew = ($this->item->id == 0);
 		
 		// Set the page header and glyph (https://docs.joomla.org/J3.x:Joomla_Standard_Icomoon_Fonts)
-		JToolBarHelper::title(JText::_('COM_U3ABOOKING_BOOKING_HEADING_EDIT'), 'pencil-2');
+		ToolBarHelper::title(Text::_('COM_U3ABOOKING_BOOKING_HEADING_EDIT'), 'pencil-2');
 									 
 		// Build the actions for new and existing records. Omit Save as Copy
 		if ($this->canDo->get('core.edit'))
 		{
 			// We can save the new record
-			JToolBarHelper::apply('booking.apply', 'JTOOLBAR_APPLY');   // Save
-			JToolBarHelper::save('booking.save', 'JTOOLBAR_SAVE');	  // Save and Close
+			ToolBarHelper::apply('booking.apply', 'JTOOLBAR_APPLY');   // Save
+			ToolBarHelper::save('booking.save', 'JTOOLBAR_SAVE');	  // Save and Close
 		}
-		JToolBarHelper::cancel('booking.cancel', 'JTOOLBAR_CLOSE');
+		ToolBarHelper::cancel('booking.cancel', 'JTOOLBAR_CLOSE');
 	}
 	
 	/**
@@ -71,10 +75,6 @@ class U3ABookingViewBooking extends HtmlView
 	protected function setDocument() 
 	{
 		$isNew = ($this->item->id < 1);
-		$document = Factory::getDocument();
-		$document->setTitle(JText::_('COM_U3ABOOKING_BOOKING_EDITING'));
-		// add script which performs the js validation for the booking reference part
-		$document->addScript(JURI::root() . 'administrator/components/com_u3abooking/models/forms/bookingref.js');
-		JText::script('COM_U3ABOOKING_BOOKING_ERROR_UNACCEPTABLE');
+		$this->document->setTitle(Text::_('COM_U3ABOOKING_BOOKING_EDITING'));
 	}
 }

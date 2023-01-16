@@ -1,4 +1,5 @@
 <?php
+namespace Robbie\Component\U3ABooking\Site\Model;
 /**
  * Model for get all the available events
  */
@@ -10,7 +11,7 @@ use Joomla\CMS\Date\Date;
 
 //JLoader::register('HelloworldHelperRoute', JPATH_ROOT . '/components/com_helloworld/helpers/route.php');
 
-class U3ABookingModelEvents extends ListModel
+class EventsModel extends ListModel
 {
 	/**
 	 * Method to build an SQL query to load the list of events
@@ -20,9 +21,9 @@ class U3ABookingModelEvents extends ListModel
 	protected function getListQuery()
 	{
 		// Initialize variables.
-		$db    = Factory::getDbo();
+		$db    = $this->getDatabase();
 		$query = $db->getQuery(true);
-		$user = Factory::getUser();
+		$user = Factory::getApplication()->getIdentity();
 		
 		$date = Factory::getDate();
 		$today = $db->quote($date->toSql());
