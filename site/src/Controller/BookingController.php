@@ -115,8 +115,6 @@ class BookingController extends FormController
 		$user = Factory::getUser();
 		$userAccessLevels = $user->getAuthorisedViewLevels();
 		
-		// the event model BaseDatabaseModel does the Table::addIncludePath to the administrator tables folder, 
-		// so we don't need to do that here
 		$event = $eventModel->getTable();
 		$event->load($data["event_id"]);
 		
@@ -350,7 +348,7 @@ class BookingController extends FormController
 		// data has been saved ok, so clear the data in the form
 		$app->setUserState($context . '.data', null);
 		
-		$event = Table::getInstance('Event', 'U3ABookingTable');
+		$event = $eventModel->getTable('event');
 		$event->load($data["event_id"]);
 		
 		$this->sendEmail($validData['id'], $validData, $event);

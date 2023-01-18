@@ -71,21 +71,12 @@ class BookingModel extends AdminModel
 	/**
 	 * Method to delete the selected bookings
 	 * For each we need to unreserve the places booked at the event
-	 * This involves calling the unreserveTickets method in the event model
+	 * This involves calling the unreserveTickets method in the helper
 	 * using the event_id and num_tickets found in each booking record.
 	 */
 	public function delete(&$pks)
 	{
-		if (!$eventModel = BaseDatabaseModel::getInstance('Event', 'U3ABookingModel'))
-		{
-			Log::add('Admin delete: event model ' . $e->getMessage(), Log::ERROR, 'u3a-error');
-			return false;
-		}
-		if (!$bookingTable = $this->getTable('Booking'))
-		{
-			Log::add('Admin delete: booking table ' . $e->getMessage(), Log::ERROR, 'u3a-error');
-			return false;
-		}
+        $bookingTable = $this->getTable('booking');
 		foreach ($pks as $pk)
 		{
 			$bookingTable->load($pk);
@@ -96,7 +87,7 @@ class BookingModel extends AdminModel
 			}
 			else
 			{
-				Log::add('Admin delete: booking table load ' . $e->getMessage(), Log::ERROR, 'u3a-error');
+				Log::add('Admin delete: booking table load failed', Log::ERROR, 'u3a-error');
 			}
 			$deletePks = array($pk);
 			parent::delete($deletePks);

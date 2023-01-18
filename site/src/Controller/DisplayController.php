@@ -34,8 +34,6 @@ class DisplayController extends BaseController
 			// find the booking record based on the id= URL param and check that the 
 			// booking_ref_part within it matches the booking= URL param
             $bookingTable = $bookingModel->getTable('booking');
-			//Table::addIncludePath(JPATH_ADMINISTRATOR . "/components/com_u3abooking/tables");
-			//$bookingTable = Table::getInstance('booking', 'U3ABookingTable', '');
 			$id = $app->input->get('id', '', 'string');
 			$result = $bookingTable->load($id);
 			
