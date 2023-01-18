@@ -78,12 +78,12 @@ class BookingModel extends AdminModel
 	{
 		if (!$eventModel = BaseDatabaseModel::getInstance('Event', 'U3ABookingModel'))
 		{
-			Log::add('Admin delete: event model ' . $e->getMessage(), Log::Error, 'u3a-error');
+			Log::add('Admin delete: event model ' . $e->getMessage(), Log::ERROR, 'u3a-error');
 			return false;
 		}
 		if (!$bookingTable = $this->getTable('Booking'))
 		{
-			Log::add('Admin delete: booking table ' . $e->getMessage(), Log::Error, 'u3a-error');
+			Log::add('Admin delete: booking table ' . $e->getMessage(), Log::ERROR, 'u3a-error');
 			return false;
 		}
 		foreach ($pks as $pk)
@@ -96,7 +96,7 @@ class BookingModel extends AdminModel
 			}
 			else
 			{
-				Log::add('Admin delete: booking table load ' . $e->getMessage(), Log::Error, 'u3a-error');
+				Log::add('Admin delete: booking table load ' . $e->getMessage(), Log::ERROR, 'u3a-error');
 			}
 			$deletePks = array($pk);
 			parent::delete($deletePks);

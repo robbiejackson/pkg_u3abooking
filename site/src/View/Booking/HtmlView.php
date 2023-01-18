@@ -20,9 +20,6 @@ class HtmlView extends BaseHtmlView
 	
 	function display($tpl = null)
 	{
-		$eventModel = BaseDatabaseModel::getInstance('Event', 'U3ABookingModel');
-		$bookingModel = $this->getModel();
-		
 		$app = Factory::getApplication();
         $user = $app->getIdentity();
 		
@@ -31,12 +28,12 @@ class HtmlView extends BaseHtmlView
 		$bookingId = $app->input->get('id', '', 'string');
 		if (!empty($bookingId))
 		{	// edit booking
-			$this->booking = $bookingModel->getItem($bookingId);
-			$this->event = $eventModel->getItem($this->booking->event_id);
+			$this->booking = $this->getModel('booking')->getItem($bookingId);
+			$this->event = $this->getModel('event')->getItem($this->booking->event_id);
 		}
 		else
 		{	// add booking
-			$this->event = $eventModel->getItem();
+			$this->event = $this->getModel('event')->getItem();
 		}
 
 		// handle if event not found (eg event date is passed or event not published)
@@ -67,9 +64,9 @@ class HtmlView extends BaseHtmlView
 		if ($this->event)
 		{
 			// pass in the event id so that it can be injected as data into the form
-			$bookingModel->setState('event.id', $this->event->id);
+			$this->getModel('booking')->setState('event.id', $this->event->id);
 			// and the max number of places that can be booked, so that the form field can be modified
-			$bookingModel->setState('event.max_tickets_per_booking', $this->event->max_tickets_per_booking);
+			$this->getModel('booking')->setState('event.max_tickets_per_booking', $this->event->max_tickets_per_booking);
 			$this->form = $this->get('Form');
 		}
 

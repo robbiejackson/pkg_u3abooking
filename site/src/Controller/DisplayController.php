@@ -22,13 +22,18 @@ class DisplayController extends BaseController
 		
 		// For the view which displays the booking amend form, make sure that
 		// the booking reference matches the record id and booking_ref_part
-		$view = $app->input->get('view', '', 'string');
+		$viewName = $app->input->get('view', '', 'string');
 		$layout = $app->input->get('layout', '', 'string');
-		if ($view == "booking" && $layout == "edit")
+        
+        // Get/Create the models
+        $eventModel = $this->getModel('event', 'site');
+        $bookingModel = $this->getModel('booking', 'site');
+        
+		if ($viewName == "booking" && $layout == "edit")
 		{
 			// find the booking record based on the id= URL param and check that the 
 			// booking_ref_part within it matches the booking= URL param
-            $bookingTable = $this->getModel()->getTable('booking');
+            $bookingTable = $bookingModel->getTable('booking');
 			//Table::addIncludePath(JPATH_ADMINISTRATOR . "/components/com_u3abooking/tables");
 			//$bookingTable = Table::getInstance('booking', 'U3ABookingTable', '');
 			$id = $app->input->get('id', '', 'string');
@@ -46,6 +51,17 @@ class DisplayController extends BaseController
 				return false;
 			}
 		}
+        // Most of the below is done in the BaseController, but we need to do it here to set up the extra model
+        $viewType = $document->getType();
+        $viewLayout = $this->input->get('layout', 'default', 'string');
+        $view = $this->getView($viewName, $viewType, '', array('base_path' => JPATH_COMPONENT, 'layout' => $viewLayout));
+        $view->document = $document;
+        
+        // Ensure that the view has access to the event and booking models
+        // The parent display() will set up the default if it's needed
+        $view->setModel($eventModel, false);
+        $view->setModel($bookingModel, false);
+        
 		parent::display($cachable, $urlparams);
 	}
 }

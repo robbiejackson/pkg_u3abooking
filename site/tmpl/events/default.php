@@ -49,7 +49,7 @@ use Joomla\CMS\Router\Route;
 				<?php echo $startDate . $startTime . ' - ' . ($sameDate ? $endTime : $endDate . $endTime); ?>
 			</td>
 			<td align="center">
-				<?php $link = Route::_('index.php?option=com_u3abooking&view=booking&layout=add&eventid=' . $row->id); ?>
+				<?php $link = Route::_('index.php?option=com_u3abooking&view=booking&layout=add&id=0&eventid=' . $row->id); ?>
 				<a href="<?php echo $link; ?>" title="Click to book places on this event">
                     <?php echo $row->title; ?>
                 </a>

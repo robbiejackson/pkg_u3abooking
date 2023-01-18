@@ -21,6 +21,21 @@ class BookingModel extends AdminModel
 	{
 		parent::populateState();
 	}
+    
+    // The AdminModel save() will call getTable to get the booking table to store the record
+    // We intercept that call so that we can store the table object, in order to get the record id subsequently
+    // In the booking model we need access to event table to update tickets reserved
+	public function getTable($type = 'booking', $prefix = 'administrator', $config = array())
+	{
+		if (strtolower($type) == 'booking') {
+            $this->bookingTable = parent::getTable($type, $prefix, $config);
+            return $this->bookingTable;
+		}
+        else
+        {
+            return parent::getTable($type, $prefix, $config);;
+        }
+	}
 	
 	public function getBookingRecordId()
 	{
@@ -132,7 +147,7 @@ class BookingModel extends AdminModel
 		$data = parent::validate($form, $data, $group);
 		if ($data)  // no validation errors from Joomla validation
 		{
-			$eventTable = getTable('Event');
+			$eventTable = $this->getTable('Event');
 			$eventTable->load($data["event_id"]);
 			if ($data['num_tickets'] > $eventTable->max_tickets_per_booking)
 			{

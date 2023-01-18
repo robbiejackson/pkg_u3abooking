@@ -17,7 +17,6 @@ use Joomla\CMS\Log\Log;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\Language\Text;
-use Joomla\CMS\Log\Log;
 use Joomla\CMS\Session\Session;
 
 /**
@@ -117,7 +116,7 @@ class BookingController extends FormController
 		
 		// the event model BaseDatabaseModel does the Table::addIncludePath to the administrator tables folder, 
 		// so we don't need to do that here
-		$event = Table::getInstance('Event', 'U3ABookingTable');
+		$event = $eventModel->getTable();
 		$event->load($data["event_id"]);
 		
 		if (!in_array($event->access, $userAccessLevels))
@@ -158,7 +157,7 @@ class BookingController extends FormController
 			// Display up to three validation messages to the user.
 			for ($i = 0, $n = count($errors); $i < $n && $i < 3; $i++)
 			{
-				if ($errors[$i] instanceof Exception)
+				if ($errors[$i] instanceof \Exception)
 				{
 					$app->enqueueMessage($errors[$i]->getMessage(), 'warning');
 				}
@@ -289,7 +288,7 @@ class BookingController extends FormController
 			// Display up to three validation messages to the user.
 			for ($i = 0, $n = count($errors); $i < $n && $i < 3; $i++)
 			{
-				if ($errors[$i] instanceof Exception)
+				if ($errors[$i] instanceof \Exception)
 				{
 					$app->enqueueMessage($errors[$i]->getMessage(), 'warning');
 				}
@@ -444,9 +443,9 @@ class BookingController extends FormController
 		{
 			$mailer->send(); 
 		}
-		catch (Exception $e)
+		catch (\Exception $e)
 		{
-			Log::add('Send email exception: ' . $e->getMessage(), Log::Error, 'u3a-error');
+			Log::add('Send email exception: ' . $e->getMessage(), Log::ERROR, 'u3a-error');
 		}
 	}
 	

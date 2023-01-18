@@ -89,7 +89,7 @@ class BookingController extends FormController
 			// Display up to three validation messages to the user.
 			for ($i = 0, $n = count($errors); $i < $n && $i < 3; $i++)
 			{
-				if ($errors[$i] instanceof Exception)
+				if ($errors[$i] instanceof \Exception)
 				{
 					$app->enqueueMessage($errors[$i]->getMessage(), 'warning');
 				}
@@ -197,9 +197,9 @@ class BookingController extends FormController
 		{
 			$mailer->send(); 
 		}
-		catch (Exception $e)
+		catch (\Exception $e)
 		{
-			Log::add('Send email exception: ' . $e->getMessage(), Log::Error, 'u3a-error');
+			Log::add('Send email exception: ' . $e->getMessage(), Log::ERROR, 'u3a-error');
 		}
 	}
 

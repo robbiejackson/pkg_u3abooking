@@ -12,7 +12,7 @@ use Joomla\CMS\Log\Log;
 
 //JLoader::register('HelloworldHelperRoute', JPATH_ROOT . '/components/com_helloworld/helpers/route.php');
 
-class U3ABookingModelEvent extends ItemModel
+class EventModel extends ItemModel
 {
 	protected $item;
 

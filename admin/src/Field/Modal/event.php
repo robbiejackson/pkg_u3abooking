@@ -58,7 +58,7 @@ class JFormFieldModal_Event extends JFormField
 			{
 				$title = $db->loadResult();
 			}
-			catch (RuntimeException $e)
+			catch (\RuntimeException $e)
 			{
 				JError::raiseWarning(500, $e->getMessage());
 			}

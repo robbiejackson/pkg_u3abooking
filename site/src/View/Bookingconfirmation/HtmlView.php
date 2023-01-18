@@ -19,12 +19,10 @@ class HtmlView extends BaseHtmlView
 	
 	function display($tpl = null)
 	{
-		$eventModel = $this->getModel('event');
-		$this->event = $eventModel->getItem();
+		$this->event = $this->getModel('event')->getItem();
 		
-		$bookingModel = $this->getModel('booking');
-		$bookingId = $bookingModel->getState('booking.id');
-		$this->booking = $bookingModel->getItem($bookingId);
+		$bookingId = $this->getModel('booking')->getState('booking.id');
+		$this->booking = $this->getModel('booking')->getItem($bookingId);
 
 		$app = Factory::getApplication();
         $user = $app->getIdentity();
