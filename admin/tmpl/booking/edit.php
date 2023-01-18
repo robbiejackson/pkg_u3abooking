@@ -41,5 +41,5 @@ $tmpl = $input->getCmd('tmpl', '') === 'component' ? '&tmpl=component' : '';
     </div>
 	
     <input type="hidden" name="task" value="" />
-    <?php echo Text::_('form.token'); ?>
+    <?php echo HTMLHelper::_('form.token'); ?>
 </form>

@@ -24,7 +24,7 @@ class BookingsController extends AdminController
 	
 	public function csvexport()
 	{
-		Session::checkToken();
+		$this->checkToken();
 		
 		$app = Factory::getApplication(); 
 		$input = $app->input; 

@@ -19,7 +19,7 @@
 				description="COM_U3ABOOKING_BOOKING_REF_DESC"
 				class="inputbox validate-bookingref"
 				required="true"
-				validate="bookingref"
+				validate="bookingrefpart"
 				/>
 		<field
 				name="num_tickets"

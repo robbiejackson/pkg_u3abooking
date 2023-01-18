@@ -95,7 +95,7 @@ class BookingController extends FormController
     public function add($key = null, $urlVar = null)
     {
 		// Check for request forgeries.
-		Session::checkToken();
+		$this->checkToken();
         
 		$app = Factory::getApplication(); 
 		$input = $app->input; 
@@ -221,7 +221,7 @@ class BookingController extends FormController
 		$bookingId = $model->getBookingRecordId();
 		$this->sendEmail($bookingId, $validData, $event);
 
-		$view = $this->getView('bookingConfirmation', 'html', 'U3ABookingView');
+		$view = $this->getView('bookingconfirmation', 'html', 'site');
 		$view->setModel($eventModel);
 		$eventModel->setState('u3aevent.id', $event->id);
 		$view->setModel($model, true);  // this is the booking model
@@ -229,13 +229,12 @@ class BookingController extends FormController
 		$view->display();
 		
 		return true;
-        
     }
 	
 	public function amend($key = null, $urlVar = null)
     {
 		// Check for request forgeries.
-		Session::checkToken();
+		$this->checkToken();
         
 		$app = Factory::getApplication(); 
 		$input = $app->input; 
@@ -355,7 +354,7 @@ class BookingController extends FormController
 		
 		$this->sendEmail($validData['id'], $validData, $event);
         
-		$view = $this->getView('bookingConfirmation', 'html', 'U3ABookingView');
+		$view = $this->getView('bookingconfirmation', 'html', 'site');
 		$view->setModel($eventModel);
 		$eventModel->setState('u3aevent.id', $event->id);
 		$view->setModel($model, true);  // this is the booking model
@@ -374,7 +373,7 @@ class BookingController extends FormController
 		// where someone nasty just does a curl to this URL passing the id alone.
 	
 		// Check for request forgeries.
-		Session::checkToken();
+		$this->checkToken();
         
 		$app = Factory::getApplication(); 
 		$input = $app->input; 
@@ -452,7 +451,7 @@ class BookingController extends FormController
 	public function find($key = null, $urlVar = null)
     {
 		// Check for request forgeries.
-		Session::checkToken();
+		$this->checkToken();
 		
 		// get the data from the HTTP POST request
 		$app = Factory::getApplication(); 

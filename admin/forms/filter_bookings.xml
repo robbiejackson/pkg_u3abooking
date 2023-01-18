@@ -8,7 +8,7 @@
 			hint="JSEARCH_FILTER"
 			class="js-stools-search-string"
 		/>
-		<field
+		<field addfieldprefix="Robbie\Component\U3ABooking\Administrator\Field"
 			name="event_id"
 			type="modal_event"
 			label="COM_U3ABOOKING_MODAL_EVENT_LABEL"

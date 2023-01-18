@@ -27,7 +27,7 @@ class BookingController extends FormController
 	public function save($key = null, $urlVar = null)
     {
 		// Check for request forgeries.
-		Session::checkToken();
+		$this->checkToken();
         
 		$app = Factory::getApplication(); 
 		$input = $app->input; 

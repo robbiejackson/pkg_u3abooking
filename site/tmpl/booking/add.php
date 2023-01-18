@@ -25,7 +25,7 @@ $this->document->getWebAssetManager()->useScript('form.validate');
 	<?php $nplaces = $this->event->max_tickets_per_booking == 1 ? "1 place" : $this->event->max_tickets_per_booking . " places"; ?>
 	<?php echo "You may book at most $nplaces at this event<br>"; ?> 
 </p>
-<form action="<?php echo Route::_("index.php?option=com_u3abooking&view=booking&layout=add&eventid=" . $this->event->id); ?>"
+<form action="<?php echo Route::_("index.php?option=com_u3abooking&view=booking&layout=add&id=0&eventid=" . $this->event->id); ?>"
     method="post" name="adminForm" id="adminForm" class="form-validate">
 <div style="border: solid 2px black;padding: 5px">
 	<div class="form-horizontal">

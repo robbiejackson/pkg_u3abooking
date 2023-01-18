@@ -72,8 +72,8 @@ class EventField extends FormField
         
 		// display the default title or "Select" if no default specified
 		$title = empty($title) ? Text::_('COM_U3ABOOKING_MENUITEM_SELECT_EVENT') : htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
-		$html  = '<span class="input-append">';
-		$html .= '<input class="input-medium" id="' . $this->id . '_name" type="text" value="' . $title . '" disabled="disabled" size="35" />';
+		$html  = '<span class="input-group">';
+		$html .= '<input class="form-control" id="' . $this->id . '_name" type="text" value="' . $title . '" disabled="disabled" size="35" />';
 
 		// html for the Select button
 		$html .= '<button'

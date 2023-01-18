@@ -9,7 +9,7 @@ use Joomla\CMS\Form\FormRule;
  * Form Rule class for the Joomla Framework.
  * Used to check that a booking reference part starts with a /
  */
-class BookingrefpartRule extends Rule
+class BookingrefpartRule extends FormRule
 {
 	/**
 	 * The regular expression.

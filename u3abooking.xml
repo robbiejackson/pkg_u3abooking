@@ -43,6 +43,7 @@
 	
     <media destination="com_u3abooking" folder="media">
 		<folder>js</folder>
+        <filename>joomla.asset.json</filename>
 	</media>
 
 	<administration>
