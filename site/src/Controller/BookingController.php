@@ -407,7 +407,7 @@ class BookingController extends FormController
         $app->setUserState($context . '.data', null);
 		
 		// set up the redirect to the add booking page
-		$addBookingPage = Route::_("index.php?option=com_u3abooking&view=booking&layout=add&eventid=" . $existingBooking->event_id, false, Route::TLS_DISABLE, true);
+		$addBookingPage = Route::_("index.php?option=com_u3abooking&view=booking&layout=add&id=0&eventid=" . $existingBooking->event_id, false, Route::TLS_DISABLE, true);
         $this->setRedirect($addBookingPage, Text::_(COM_U3ABOOKING_DELETE_SUCCESSFUL));
 		return true;
 	}
@@ -469,11 +469,8 @@ class BookingController extends FormController
 		{
 			$id = substr($data["booking_ref_for_amendment"], 0, $slash);
 			$booking_ref_part = substr($data["booking_ref_for_amendment"], $slash);
-			
-			// Need to do Table::addIncludePath because the event model hasn't been instantiated
-			// (it would have done this on our behalf)
-			Table::addIncludePath(JPATH_ADMINISTRATOR . "/components/com_u3abooking/tables");
-			$booking = Table::getInstance('Booking', 'U3ABookingTable');
+
+			$booking = $this->getModel('booking')->getTable('booking');
 			$booking->load($id);
 			
 			if (isset($booking->booking_ref_part) && ($booking->booking_ref_part == $booking_ref_part))

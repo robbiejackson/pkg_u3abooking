@@ -57,12 +57,12 @@ $this->document->getWebAssetManager()->useScript('form.validate');
 			</button>
 		</div>
 		<div class="btn-group">
-			<button type="button" class="btn btn-primary" onclick="Joomla.submitbutton('booking.delete')">
+			<button type="button" class="btn btn-primary" onclick="Joomla.submitbutton('booking.delete', '', false)">
 				<span class="icon-ok"></span><?php echo Text::_('COM_U3ABOOKING_DELETE_BOOKING') ?>
 			</button>
 		</div>
 		<div class="btn-group">
-			<button type="button" class="btn" onclick="Joomla.submitbutton('booking.cancelAmend')">
+			<button type="button" class="btn" onclick="Joomla.submitbutton('booking.cancelAmend', '', false)">
 				<span class="icon-cancel"></span><?php echo Text::_('COM_U3ABOOKING_CANCEL_AMEND_BOOKING') ?>
 			</button>
 		</div>

@@ -40,7 +40,7 @@ $this->document->getWebAssetManager()->useScript('form.validate');
 	</div>
 	<div class="btn-toolbar">
 		<div class="btn-group">
-			<button type="button" class="btn btn-primary" onclick="Joomla.submitbutton('booking.find')">
+			<button type="button" class="btn btn-primary" onclick="Joomla.submitbutton('booking.find', '', false)">
 				<span class="icon-ok"></span><?php echo Text::_('COM_U3ABOOKING_FIND_BOOKING') ?>
 			</button>
 		</div>
@@ -65,7 +65,7 @@ $this->document->getWebAssetManager()->useScript('form.validate');
 			</button>
 		</div>
 		<div class="btn-group">
-			<button type="button" class="btn" onclick="Joomla.submitbutton('booking.cancelAdd')">
+			<button type="button" class="btn" onclick="Joomla.submitbutton('booking.cancelAdd', '', false)">
 				<span class="icon-cancel"></span><?php echo Text::_('JCANCEL') ?>
 			</button>
 		</div>
