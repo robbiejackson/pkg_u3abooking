@@ -6,10 +6,10 @@ defined('_JEXEC') or die('Restricted access');
 use Joomla\Registry\Registry;
 use Joomla\CMS\MVC\Model\AdminModel;
 use Joomla\CMS\MVC\Model\BaseDatabaseModel;
-
 use Joomla\CMS\Factory;
 use Joomla\CMS\Table\Table;
 use Joomla\CMS\Log\Log;
+use Robbie\Component\U3ABooking\Administrator\Helper\TicketReserverHelper;
 
 /**
  * Model which handles actions in the Admin Bookings form and Admin Edit Booking
@@ -92,7 +92,7 @@ class BookingModel extends AdminModel
 			
 			if ($bookingTable->id)
 			{
-				$eventModel->unreserveTickets($bookingTable->event_id, $bookingTable->num_tickets);
+				TicketReserverHelper::unreserveTickets($bookingTable->event_id, $bookingTable->num_tickets);
 			}
 			else
 			{

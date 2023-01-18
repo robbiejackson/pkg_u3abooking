@@ -13,7 +13,7 @@ use Joomla\CMS\Log\Log;
 use Joomla\CMS\Session\Session;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Uri\Uri;
-
+use Robbie\Component\U3ABooking\Administrator\Helper\TicketReserverHelper;
 
 class BookingController extends FormController
 {
@@ -110,7 +110,7 @@ class BookingController extends FormController
 		{
 			// try to allocate the extra tickets
 			$ticketsToReserve = $validData['num_tickets'] - $existingBooking->num_tickets;
-			$tickets_reserved = $eventModel->reserveTickets($validData['event_id'], $ticketsToReserve, $forceReserve);
+			$tickets_reserved = TicketReserverHelper::reserveTickets($validData['event_id'], $ticketsToReserve, $forceReserve);
 			
 			if ($tickets_reserved == 0)
 			{
@@ -134,7 +134,7 @@ class BookingController extends FormController
 		}
 		elseif ($validData["num_tickets"] < $existingBooking->num_tickets)
 		{
-			$eventModel->unreserveTickets($validData['event_id'], $existingBooking->num_tickets - $validData['num_tickets']);
+			TicketReserverHelper::unreserveTickets($validData['event_id'], $existingBooking->num_tickets - $validData['num_tickets']);
 		}
 
 		// Attempt to save the data.

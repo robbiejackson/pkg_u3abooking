@@ -18,6 +18,7 @@ use Joomla\CMS\Router\Route;
 use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Session\Session;
+use Robbie\Component\U3ABooking\Administrator\Helper\TicketReserverHelper;
 
 /**
  * HelloWorld Controller
@@ -180,7 +181,7 @@ class BookingController extends FormController
 		$validData['booking_ref_part'] = "/$seconds$minutes";
         
 		// try to allocate the tickets
-		$tickets_reserved = $eventModel->reserveTickets($data['event_id'], $data['num_tickets']);
+		$tickets_reserved = TicketReserverHelper::reserveTickets($data['event_id'], $data['num_tickets']);
 		
 		if ($tickets_reserved == 0)
 		{
@@ -306,7 +307,7 @@ class BookingController extends FormController
 		{
 			// try to allocate the extra tickets
 			$ticketsToReserve = $validData['num_tickets'] - $existingBooking->num_tickets;
-			$tickets_reserved = $eventModel->reserveTickets($validData['event_id'], $ticketsToReserve);
+			$tickets_reserved = TicketReserverHelper::reserveTickets($validData['event_id'], $ticketsToReserve);
 			
 			if ($tickets_reserved == 0)
 			{
@@ -330,7 +331,7 @@ class BookingController extends FormController
 		}
 		elseif ($validData["num_tickets"] < $existingBooking->num_tickets)
 		{
-			$eventModel->unreserveTickets($validData['event_id'], $existingBooking->num_tickets - $validData['num_tickets']);
+			TicketReserverHelper::unreserveTickets($validData['event_id'], $existingBooking->num_tickets - $validData['num_tickets']);
 		}
 
 		// Attempt to save the data.
@@ -396,7 +397,7 @@ class BookingController extends FormController
 			return false;
 		}
 		
-		$eventModel->unreserveTickets($existingBooking->event_id, $existingBooking->num_tickets);
+		TicketReserverHelper::unreserveTickets($existingBooking->event_id, $existingBooking->num_tickets);
 		// to match the delete() of AdminModel we need to pass by reference an array of the ids of records to be deleted
 		$idArray = array($data['id']);
 		$model->delete($idArray);
