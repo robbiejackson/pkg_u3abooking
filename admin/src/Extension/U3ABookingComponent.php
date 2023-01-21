@@ -1,6 +1,6 @@
 <?php
 
-namespace Robbie\Component\Helloworld\Administrator\Extension;
+namespace Robbie\Component\U3ABooking\Administrator\Extension;
 
 defined('JPATH_PLATFORM') or die;
 

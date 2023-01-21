@@ -2,7 +2,7 @@
 namespace Robbie\Component\U3ABooking\Site\Controller;
 /**
  * @package     Joomla.Site
- * @subpackage  com_helloworld
+ * @subpackage  com_u3abooking
  *
  * @copyright   Copyright (C) 2005 - 2015 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
@@ -21,13 +21,13 @@ use Joomla\CMS\Session\Session;
 use Robbie\Component\U3ABooking\Administrator\Helper\TicketReserverHelper;
 
 /**
- * HelloWorld Controller
+ * U3ABooking Controller
  *
  * @package     Joomla.Site
- * @subpackage  com_helloworld
+ * @subpackage  U3ABooking
  *
  * Used to handle the http POST from the front-end form which allows 
- * users to enter a new helloworld message
+ * users to book against events
  *
  */
 class BookingController extends FormController
@@ -77,7 +77,7 @@ class BookingController extends FormController
 		$app->setUserState($context . '.data', null);
 		
 		// if there's a return parameter in the URL then use it
-		$returnParam = $app->input->get('return', '', 'cmd');
+		$returnParam = $app->input->get('return', '', 'base64');
 		if ($returnParam)
 		{
 			$returnUrl = base64_decode($returnParam);

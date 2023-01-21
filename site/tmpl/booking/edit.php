@@ -30,7 +30,7 @@ $this->document->getWebAssetManager()->useScript('form.validate');
 	$app = Factory::getApplication();
 	$bookingref = $app->input->getString('booking', '');
 	$bookingParam = $bookingref ? "&booking=" . $bookingref : "";
-	$return = $app->input->getCmd('return', '');
+	$return = $app->input->get('return', '', 'base64');
 	$returnParam = $return ? "&return=" . $return : "";
 ?>
 	

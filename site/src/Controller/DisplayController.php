@@ -43,7 +43,7 @@ class DisplayController extends BaseController
 			{
 				// bad booking reference
 				// redirect to the return URL if set, or home page if not
-				$returnURL = $app->input->get('return', '', 'string');
+				$returnURL = $app->input->get('return', '', 'base64');
 				$redirectURL = $returnURL ? base64_decode($returnURL) : Uri::root();
 				$this->setRedirect($redirectURL, Text::_('COM_U3ABOOKING_INVALID_BOOKING_REFERENCE'), 'warning');
 				return false;
