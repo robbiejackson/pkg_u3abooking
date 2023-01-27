@@ -28,4 +28,6 @@ $body .= "Special requirements: <br>" . $this->booking->special_requirements . "
 <?php endif; ?>
 <div>
 	<a href="<?php echo $home; ?>" class="btn btn-primary" role="button">Continue</a>
+    <br>
+    <br>
 </div>

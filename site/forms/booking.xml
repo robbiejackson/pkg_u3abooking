@@ -14,7 +14,7 @@
 				description="COM_U3ABOOKING_BOOKING_REF_READONLY_DESC"
 				readonly="true"
 				/>		
-    <fieldset name="booking_details" addrulepath= "/components/com_u3abooking/models/rules">
+    <fieldset name="booking_details" addruleprefix="Robbie\Component\U3ABooking\Administrator\Rule">
 		<field
 				name="id"
 				type="hidden"

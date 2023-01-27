@@ -3,7 +3,7 @@
 	<layout title="COM_U3ABOOKING_EVENT_MENUTYPE_TITLE">
 		<message>COM_U3ABOOKING_EVENT_MENUTYPE_DESC</message>
 	</layout>
-	<fields name="request" addfieldpath="/administrator/components/com_u3abooking/models/fields">
+	<fields name="request" addfieldprefix="Robbie\Component\U3ABooking\Administrator\Field">
 		<fieldset name="request">
 			<field
 				name="eventid"
