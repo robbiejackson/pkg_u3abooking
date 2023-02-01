@@ -45,7 +45,7 @@ class BookingController extends FormController
         // set up the redirect to the site home page
         $this->setRedirect(
             (string)Uri::root(), 
-            Text::_(COM_U3ABOOKING_AMENDMENT_CANCELLED)
+            Text::_('COM_U3ABOOKING_AMENDMENT_CANCELLED')
 		);
     }
 	
@@ -62,7 +62,7 @@ class BookingController extends FormController
         // set up the redirect to the site home page
         $this->setRedirect(
             (string)Uri::root(), 
-            Text::_(COM_U3ABOOKING_ADD_CANCELLED)
+            Text::_('COM_U3ABOOKING_ADD_CANCELLED')
 		);
 	}
 	
@@ -86,7 +86,7 @@ class BookingController extends FormController
 		{	// use the site home page as the redirect URL
 			$returnUrl = (string)Uri::root();
 		}
-        $this->setRedirect($returnUrl, Text::_(COM_U3ABOOKING_AMENDMENT_CANCELLED));
+        $this->setRedirect($returnUrl, Text::_('COM_U3ABOOKING_AMENDMENT_CANCELLED'));
 	}
 	
     /*
@@ -406,7 +406,7 @@ class BookingController extends FormController
 		
 		// set up the redirect to the add booking page
 		$addBookingPage = Route::_("index.php?option=com_u3abooking&view=booking&layout=add&id=0&eventid=" . $existingBooking->event_id, false, Route::TLS_DISABLE, true);
-        $this->setRedirect($addBookingPage, Text::_(COM_U3ABOOKING_DELETE_SUCCESSFUL));
+        $this->setRedirect($addBookingPage, Text::_('COM_U3ABOOKING_DELETE_SUCCESSFUL'));
 		return true;
 	}
 	
