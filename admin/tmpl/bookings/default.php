@@ -73,18 +73,18 @@ $listDirn      = $this->escape($this->state->get('list.direction'));
                                     <td>
                                         <?php echo HTMLHelper::_('grid.id', $i, $row->id); ?>
                                     </td>
-                                    <td align="center">
+                                    <td>
                                         <a href="<?php echo $link; ?>" title="<?php echo Text::_('COM_U3ABOOKING_EDIT_BOOKING'); ?>">
                                             <?php echo $row->booking_reference; ?>
                                         </a>
                                     </td>
-                                    <td align="center">
+                                    <td>
                                         <?php $eventLink = Route::_('index.php?option=com_u3abooking&task=event.edit&id=' . $row->event_id); ?>
                                         <a href="<?php echo $eventLink; ?>" title="<?php echo Text::_('COM_U3ABOOKING_EDIT_EVENT'); ?>">
                                             <?php echo $row->event_title; ?>
                                         </a>
                                     </td>
-                                    <td align="center">
+                                    <td>
                                         <?php $sameDate = (substr($row->event_start, 0, 10) == substr($row->event_end, 0, 10)); ?>
                                         <?php echo substr($row->event_start, 0, 16) . ' - ' . ($sameDate ? substr($row->event_end, 11, 5) : substr($row->event_end, 0, 16)); ?>
                                     </td>
@@ -94,10 +94,10 @@ $listDirn      = $this->escape($this->state->get('list.direction'));
                                     <td align="center">
                                         <?php echo $row->telephone; ?>
                                     </td>
-                                    <td align="center">
+                                    <td>
                                         <?php echo $row->email; ?>
                                     </td>
-                                    <td align="center">
+                                    <td>
                                         <?php echo $row->username; ?>
                                     </td>
                                     <td align="center">

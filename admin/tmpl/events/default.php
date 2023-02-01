@@ -123,10 +123,10 @@ if ($saveOrder)
                                             <?php echo Text::sprintf('JGLOBAL_LIST_ALIAS', $this->escape($row->alias)); ?>
                                         </div>
                                     </td>
-                                    <td align="center">
+                                    <td>
                                         <?php echo $row->venue; ?>
                                     </td>
-                                    <td align="center">
+                                    <td>
                                         <?php $sameDate = (substr($row->event_start, 0, 10) == substr($row->event_end, 0, 10)); ?>
                                         <?php echo substr($row->event_start, 0, 16) . ' - ' . ($sameDate ? substr($row->event_end, 11, 5) : substr($row->event_end, 0, 16)); ?>
                                     </td>
@@ -136,13 +136,13 @@ if ($saveOrder)
                                     <td align="center">
                                         <?php echo $row->tickets_taken; ?>
                                     </td>
-                                    <td align="center">
+                                    <td>
                                         <?php echo $row->category_title; ?>
                                     </td>
-                                    <td align="center">
+                                    <td>
                                         <?php echo $row->access_level; ?>
                                     </td>
-                                    <td align="center">
+                                    <td>
                                         <?php echo $row->organiser; ?>
                                     </td>
                                     <td align="center">
