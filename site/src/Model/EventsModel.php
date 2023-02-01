@@ -27,8 +27,9 @@ class EventsModel extends ListModel
 		$today = $db->quote($date->toSql());
 
 		// Create the base select statement.
-		$query->select('e.id as id, e.title as title, e.venue as venue, e.event_start as event_start, e.event_end as event_end,
-				  e.capacity as capacity, e.tickets_taken as tickets_taken, e.access as access, e.catid as catid')
+		$query->select('e.id as id, e.title as title, e.alias as alias, e.venue as venue, 
+                  e.event_start as event_start, e.event_end as event_end, e.capacity as capacity, 
+                  e.tickets_taken as tickets_taken, e.access as access, e.catid as catid')
 			  ->from($db->quoteName('#__u3a_event', 'e'));
 
         // Join over the categories.

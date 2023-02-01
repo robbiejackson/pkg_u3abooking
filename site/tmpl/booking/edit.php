@@ -34,7 +34,7 @@ $this->document->getWebAssetManager()->useScript('form.validate');
 	$returnParam = $return ? "&return=" . $return : "";
 ?>
 	
-<form action="<?php echo Route::_("index.php?option=com_u3abooking&view=booking&layout=edit&eventid=" . $this->event->id . "&id=" . $this->booking->id . $bookingParam . $returnParam); ?>"
+<form action="<?php echo Route::_("index.php?option=com_u3abooking&view=booking&layout=edit&eventid=" . $this->event->id . ':' . $this->event->alias . "&id=" . $this->booking->id . $bookingParam . $returnParam); ?>"
     method="post" name="adminForm" id="adminForm" class="form-validate">
 
 	<div class="form-horizontal">

@@ -6,12 +6,15 @@ defined('JPATH_PLATFORM') or die;
 
 use Joomla\CMS\Categories\CategoryServiceInterface;
 use Joomla\CMS\Categories\CategoryServiceTrait;
+use Joomla\CMS\Component\Router\RouterServiceTrait;
+use Joomla\CMS\Component\Router\RouterServiceInterface;
 use Joomla\CMS\Extension\MVCComponent;
 use Joomla\Database\DatabaseAwareTrait;
     
-class U3ABookingComponent extends MVCComponent implements CategoryServiceInterface
+class U3ABookingComponent extends MVCComponent implements CategoryServiceInterface, RouterServiceInterface
 {
 	use CategoryServiceTrait;
+    use RouterServiceTrait;
     use DatabaseAwareTrait;
 
 	/**

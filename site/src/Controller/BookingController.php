@@ -423,8 +423,11 @@ class BookingController extends FormController
 		$mailer->setSubject("Booking for " . $event->title);
 		
 		$bookingReference = $id . $validData['booking_ref_part'];
+        
+        $eventid = $event->id;
+        $eventalias = $event->alias;
 		
-		$bookingAmendURL = Route::_("index.php?option=com_u3abooking&view=booking&layout=edit&id=$id&booking=$bookingReference", false, null, true);
+		$bookingAmendURL = Route::_("index.php?option=com_u3abooking&view=booking&layout=edit&eventid={$event->id}:{$event->alias}&id=$id&booking=$bookingReference", false, null, true);
 		
 		$plural = $validData['num_tickets'] == 1 ? "" : "s";
 		$body = "You have booked " . $validData['num_tickets'] . " place" . $plural . " at the event " . $event->title . "<br><br>";
