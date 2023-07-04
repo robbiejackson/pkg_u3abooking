@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="component" version="3.9.0" method="upgrade">
+<extension type="component" version="4.2.0" method="upgrade">
 
 	<name>COM_U3ABOOKING</name>
-	<creationDate>July 2020</creationDate>
+	<creationDate>July 2023</creationDate>
 	<author>Robbie Jackson</author>
 	<authorEmail>robbie.jackson.email@gmail.org</authorEmail>
 	<copyright>Copyright 2023</copyright>
-	<version>1.0.0</version>
+	<version>2.0.0</version>
 	<description>COM_U3ABOOKING_DESCRIPTION</description>
     
     <namespace path="src">Robbie\Component\U3ABooking</namespace>
