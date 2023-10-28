@@ -115,7 +115,7 @@ class Router implements RouterInterface
 	public function preprocess($query)
 	{
         $app  = Factory::getApplication();
-        $sitemenu = $app->getMenu();
+        $sitemenu = $app->getMenu("site");
 
         if (isset($query['Itemid']))
         {
