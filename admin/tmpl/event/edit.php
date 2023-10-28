@@ -31,7 +31,7 @@ $tmpl = $input->getCmd('tmpl', '') === 'component' ? '&tmpl=component' : '';
                 </div>
                 <div class="col-lg-3">
                     <?php echo $this->form->renderFieldset('details');  ?>
-					<?php $url = Uri::root() . "component/u3abooking/?view=booking&layout=add&id=0&eventid={$this->item->id}";  ?>
+					<?php $url = Route::link("site", "index.php?option=com_u3abooking&view=booking&layout=add&eventid={$this->item->id}");  ?>
 					<?php echo "Booking URL: <a href=\"{$url}\">URL</a>";  ?>
                 </div>
             </div>

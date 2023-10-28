@@ -39,7 +39,7 @@ class HtmlView extends BaseHtmlView
 
 		parent::display($tpl);
 
-		$this->setDocument();
+		$this->setupDocument();
 	}
 
 	/**
@@ -92,7 +92,7 @@ class HtmlView extends BaseHtmlView
 	/**
 	 * Method to set up the document properties
 	 */
-	protected function setDocument() 
+	protected function setupDocument() 
 	{
 		$isNew = ($this->item->id < 1);
 		$this->document->setTitle($isNew ? Text::_('COM_U3ABOOKING_EVENT_CREATING') :

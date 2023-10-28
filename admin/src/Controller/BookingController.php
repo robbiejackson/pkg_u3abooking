@@ -51,8 +51,7 @@ class BookingController extends FormController
 	    // Access check.
 		if (!Factory::getApplication()->getIdentity()->authorise('core.edit', 'com_u3abooking'))
 		{
-			$this->setError(Text::_('JLIB_APPLICATION_ERROR_SAVE_NOT_PERMITTED'));
-			$this->setMessage($this->getError(), 'error');
+			$this->setMessage(Text::_('JLIB_APPLICATION_ERROR_SAVE_NOT_PERMITTED'), 'error');
 
 			$this->setRedirect($normalRedirectURL);
 
@@ -141,8 +140,7 @@ class BookingController extends FormController
 		if (!$model->save($validData))
 		{
             // Handle the case where the save failed - redirect back to the edit form
-			$this->setError(Text::sprintf('JLIB_APPLICATION_ERROR_SAVE_FAILED', $model->getError()));
-			$this->setMessage($this->getError(), 'error');
+			$this->setMessage(Text::sprintf('JLIB_APPLICATION_ERROR_SAVE_FAILED', $model->getError()), 'error');
 			$this->setRedirect($currentUri);
 			
 			Log::add($this->getError(), Log::ERROR, 'admin-save-booking');

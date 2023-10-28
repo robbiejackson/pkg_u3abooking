@@ -47,7 +47,7 @@ class HtmlView extends BaseHtmlView
 
 		parent::display($tpl);
 
-		$this->setDocument();
+		$this->setupDocument();
 	}
 
 	/**
@@ -89,7 +89,7 @@ class HtmlView extends BaseHtmlView
 	 *
 	 * @return void
 	 */
-	protected function setDocument() 
+	protected function setupDocument() 
 	{
 		$this->document->setTitle(Text::_('COM_U3ABOOKING_ADMINISTRATION_EVENTS'));
 	}

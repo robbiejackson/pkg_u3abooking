@@ -205,8 +205,7 @@ class BookingController extends FormController
 		if (!$model->save($validData))
 		{
             // Handle the case where the save failed - redirect back to the edit form
-			$this->setError(Text::sprintf('JLIB_APPLICATION_ERROR_SAVE_FAILED', $model->getError()));
-			$this->setMessage($this->getError(), 'error');
+			$this->setMessage(Text::sprintf('JLIB_APPLICATION_ERROR_SAVE_FAILED', $model->getError()), 'error');
 			$this->setRedirect($currentUri);
 			
 			Log::add($this->getError(), Log::ERROR, 'site-add-booking');
@@ -336,8 +335,7 @@ class BookingController extends FormController
 		if (!$model->save($validData))
 		{
             // Handle the case where the save failed - redirect back to the edit form
-			$this->setError(Text::sprintf('JLIB_APPLICATION_ERROR_SAVE_FAILED', $model->getError()));
-			$this->setMessage($this->getError(), 'error');
+			$this->setMessage(Text::sprintf('JLIB_APPLICATION_ERROR_SAVE_FAILED', $model->getError()), 'error');
 			$this->setRedirect($currentUri);
 			
 			Log::add($this->getError(), Log::ERROR, 'site-amend-booking');
