@@ -14,8 +14,7 @@ use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Session\Session;
 
-HTMLHelper::_('behavior.core');
-HTMLHelper::_('script', 'com_u3abooking/admin-events-modal.js', array('version' => 'auto', 'relative' => true));
+$this->document->getWebAssetManager()->useScript('com_u3abooking.admin-events-modal');
 
 $listOrder     = $this->escape($this->state->get('list.ordering'));
 $listDirn      = $this->escape($this->state->get('list.direction'));

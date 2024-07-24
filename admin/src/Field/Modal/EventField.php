@@ -45,8 +45,6 @@ class EventField extends FormField
 		$wa->addInlineScript("
 			function jSelectEvent_" . $this->id . "(id, title, catid, object, url, language) {
                 window.processModalSelect('Event', '" . $this->id . "', id, title, catid, object, url, language);
-				let element = window.parent.document.getElementById('filter_event_id_id');
-				element.dispatchEvent(new Event('change'));
 			}
 			");
 
@@ -72,8 +70,9 @@ class EventField extends FormField
         
 		// display the default title or "Select" if no default specified
 		$title = empty($title) ? Text::_('COM_U3ABOOKING_MENUITEM_SELECT_EVENT') : htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
+
 		$html  = '<span class="input-group">';
-		$html .= '<input class="form-control" id="' . $this->id . '_name" type="text" value="' . $title . '" disabled="disabled" size="35" />';
+		$html .= '<input class="form-control " id="' . $this->id . '_name" type="text" value="' . $title . '" disabled="disabled" size="35"/>';
 
 		// html for the Select button
 		$html .= '<button'
@@ -120,13 +119,19 @@ class EventField extends FormField
 		);
 
 		// class='required' for client side validation.
-		$class = $this->required ? ' class="required modal-value"' : '';
+		$classRequired = $this->required ? 'required modal-value ' : '';
+        $class = ' class="' . $classRequired . '"';
 
 		// hidden input field to store the event record id
+        if ($this->onchange) {
+            $onchange = 'onchange="' . $this->onchange . '"';
+        } else {
+            $onchange = "";
+        }
 		$html .= '<input type="hidden" id="' . $this->id . '_id" ' . $class 
 			. ' data-required="' . (int) $this->required . '" name="' . $this->name
 			. '" data-text="' . htmlspecialchars(Text::_('COM_U3ABOOKING_MENUITEM_SELECT_EVENT', true), ENT_COMPAT, 'UTF-8') 
-			. '" value="' . $value . '" onchange="this.form.submit();"/>';
+			. '" value="' . $value . '"' . $onchange . '/>';
 
 		return $html;
 	}
