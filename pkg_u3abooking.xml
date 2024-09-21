@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension type="package" version="1.0" method="upgrade">
+    <name>U3A Booking Package</name>
+    <author>Robbie Jackson</author>
+    <creationDate>21 September 2024</creationDate>
+    <packagename>u3abooking</packagename>
+    <version>1.0.0</version>
+    <packager>Robbie Jackson</packager>
+    <files folder="constituents">
+        <file type="component" id="com_u3abooking" >com_u3abooking.zip</file>
+        <file type="plugin" id="u3abooking" group="console">plg_u3abooking_console.zip</file>
+    </files>
+</extension>

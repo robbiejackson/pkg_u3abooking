@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" group="console" method="upgrade">
+	<name>plg_console_u3abooking</name>
+	<version>1.0.0</version>
+	<creationDate>today</creationDate>
+	<author>Robbie</author>
+	<description>Plugin to create console job for emailing bookings</description>
+	<namespace path="src">Robbie\Plugin\Console\U3ABooking</namespace>
+	<files>
+		<folder plugin="u3abooking">services</folder>
+		<folder>src</folder>
+	</files>
+</extension>
