@@ -10,9 +10,16 @@
 		/>
 		<field addfieldprefix="Robbie\Component\U3ABooking\Administrator\Field"
 			name="event_id"
-			type="modal_event"
+			type="ModalSelect"
 			label="COM_U3ABOOKING_MODAL_EVENT_LABEL"
 			description="COM_U3ABOOKING_MODAL_EVENT_DESC"
+            select="true"
+            clear="true"
+            titleSelect="COM_U3ABOOKING_MODAL_EVENT_LABEL"
+            urlSelect="index.php?option=com_u3abooking&amp;view=events&amp;layout=modal&amp;tmpl=component"
+            sql_title_table="#__u3a_event"
+            sql_title_column="title"
+            sql_title_key="id"
 			onchange="this.form.submit();"
 			>
 		</field>

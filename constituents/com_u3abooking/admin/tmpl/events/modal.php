@@ -14,18 +14,17 @@ use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Session\Session;
 
-$this->document->getWebAssetManager()->useScript('com_u3abooking.admin-events-modal');
+$this->document->getWebAssetManager()->useScript('modal-content-select');
 
 $listOrder     = $this->escape($this->state->get('list.ordering'));
 $listDirn      = $this->escape($this->state->get('list.direction'));
 
 $app = Factory::getApplication();
-$function  = $app->input->getCmd('function', 'jSelectEvent');
 $onclick   = $this->escape($function);
 ?>
 <div class="container-popup">
     
-<form action="<?php echo Route::_('index.php?option=com_u3abooking&view=events&layout=modal&tmpl=component&function=' . $function . '&' . Session::getFormToken() . '=1'); ?>" method="post" name="adminForm" id="adminForm" class="form-inline">
+<form action="<?php echo Route::_('index.php?option=com_u3abooking&view=events&layout=modal&tmpl=component&' . Session::getFormToken() . '=1'); ?>" method="post" name="adminForm" id="adminForm" class="form-inline">
 
 	<?php echo LayoutHelper::render('joomla.searchtools.default', array('view' => $this)); ?>
     
@@ -82,10 +81,9 @@ $onclick   = $this->escape($function);
                             <td>
                                 <?php 
                                 $link = 'index.php?option=com_u3abooking&view=event&id=' . $row->id;
-                                $attribs = 'data-function="' . $this->escape($onclick) . '"'
+                                $attribs = 'data-content-select'
 								. ' data-id="' . $row->id . '"'
 								. ' data-title="' . $this->escape(addslashes($row->title)) . '"'
-								. ' data-uri="' . $link . '"'
                                 ;
                                 ?>
                                 <a class="select-link" href="javascript:void(0)" <?php echo $attribs; ?>>
