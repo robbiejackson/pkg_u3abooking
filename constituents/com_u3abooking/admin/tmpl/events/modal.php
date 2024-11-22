@@ -26,7 +26,7 @@ $onclick   = $this->escape($function);
     
 <form action="<?php echo Route::_('index.php?option=com_u3abooking&view=events&layout=modal&tmpl=component&' . Session::getFormToken() . '=1'); ?>" method="post" name="adminForm" id="adminForm" class="form-inline">
 
-	<?php echo LayoutHelper::render('joomla.searchtools.default', array('view' => $this)); ?>
+    <?php echo LayoutHelper::render('joomla.searchtools.default', array('view' => $this)); ?>
     
     <div class="clearfix"></div>
 
@@ -37,16 +37,16 @@ $onclick   = $this->escape($function);
                 <th width="25%">
                     <?php echo HTMLHelper::_('searchtools.sort', 'COM_U3ABOOKING_EVENTS_TITLE', 'title', $listDirn, $listOrder); ?>
                 </th>
-				<th width="15%">
+                <th width="15%">
                     <?php echo HTMLHelper::_('searchtools.sort', 'COM_U3ABOOKING_EVENTS_VENUE', 'venue', $listDirn, $listOrder); ?>
                 </th>
-				<th width="20%">
+                <th width="20%">
                     <?php echo HTMLHelper::_('searchtools.sort', 'COM_U3ABOOKING_EVENTS_DATETIME', 'event_start', $listDirn, $listOrder); ?>
                 </th>
-				<th width="6%">
+                <th width="6%">
                     <?php echo Text::_('COM_U3ABOOKING_EVENTS_CAPACITY'); ?>
                 </th>
-				<th width="6%">
+                <th width="6%">
                     <?php echo Text::_('JCATEGORY'); ?>
                 </th>
                 <th width="6%">
@@ -82,15 +82,15 @@ $onclick   = $this->escape($function);
                                 <?php 
                                 $link = 'index.php?option=com_u3abooking&view=event&id=' . $row->id;
                                 $attribs = 'data-content-select'
-								. ' data-id="' . $row->id . '"'
-								. ' data-title="' . $this->escape(addslashes($row->title)) . '"'
+                                . ' data-id="' . $row->id . '"'
+                                . ' data-title="' . $this->escape(addslashes($row->title)) . '"'
                                 ;
                                 ?>
                                 <a class="select-link" href="javascript:void(0)" <?php echo $attribs; ?>>
                                     <?php echo $this->escape($row->title); ?>
                                 </a>
                                 <span class="small break-word">
-                                	<?php echo Text::sprintf('JGLOBAL_LIST_ALIAS', $this->escape($row->alias)); ?>
+                                    <?php echo Text::sprintf('JGLOBAL_LIST_ALIAS', $this->escape($row->alias)); ?>
                                 </span>
                             </td>
                             <td align="center">
@@ -98,15 +98,15 @@ $onclick   = $this->escape($function);
                             </td>
                             <td align="center">
                                 <?php $sameDate = (substr($row->event_start, 0, 10) == substr($row->event_end, 0, 10)); ?>
-								<?php echo substr($row->event_start, 0, 16) . ' - ' . ($sameDate ? substr($row->event_end, 11, 5) : substr($row->event_end, 0, 16)); ?>
+                                <?php echo substr($row->event_start, 0, 16) . ' - ' . ($sameDate ? substr($row->event_end, 11, 5) : substr($row->event_end, 0, 16)); ?>
                             </td>
-							<td align="center">
+                            <td align="center">
                                 <?php echo $row->capacity; ?>
                             </td>
-							<td align="center">
+                            <td align="center">
                                 <?php echo $row->category_title; ?>
                             </td>
-							<td align="center">
+                            <td align="center">
                                 <?php echo $row->access_level; ?>
                             </td>
                             <td align="center">

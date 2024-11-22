@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form>
-	<fields name="filter">
-		<field
-			name="search"
-			type="text"
-			label="COM_U3ABOOKING_SEARCH_IN_TITLE"
-			hint="JSEARCH_FILTER"
-			class="js-stools-search-string"
-		/>
-		<field addfieldprefix="Robbie\Component\U3ABooking\Administrator\Field"
-			name="event_id"
-			type="ModalSelect"
-			label="COM_U3ABOOKING_MODAL_EVENT_LABEL"
-			description="COM_U3ABOOKING_MODAL_EVENT_DESC"
+    <fields name="filter">
+        <field
+            name="search"
+            type="text"
+            label="COM_U3ABOOKING_SEARCH_IN_TITLE"
+            hint="JSEARCH_FILTER"
+            class="js-stools-search-string"
+        />
+        <field addfieldprefix="Robbie\Component\U3ABooking\Administrator\Field"
+            name="event_id"
+            type="ModalSelect"
+            label="COM_U3ABOOKING_MODAL_EVENT_LABEL"
+            description="COM_U3ABOOKING_MODAL_EVENT_DESC"
             select="true"
             clear="true"
             titleSelect="COM_U3ABOOKING_MODAL_EVENT_LABEL"
@@ -20,44 +20,44 @@
             sql_title_table="#__u3a_event"
             sql_title_column="title"
             sql_title_key="id"
-			onchange="this.form.submit();"
-			>
-		</field>
-	</fields>
-	<fields name="list">
+            onchange="this.form.submit();"
+            >
+        </field>
+    </fields>
+    <fields name="list">
         <field
-			name="fullordering"
-			type="list"
-			label="COM_U3ABOOKING_LIST_FULL_ORDERING"
-			description="COM_U3ABOOKING_LIST_FULL_ORDERING_DESC"
-			onchange="this.form.submit();"
-			default="id ASC"
-			>
-			<option value="">JGLOBAL_SORT_BY</option>
-			<option value="event_title ASC">COM_U3ABOOKING_EVENT_TITLE_ASC</option>
-			<option value="event_title DESC">COM_U3ABOOKING_EVENT_TITLE_DESC</option>
-			<option value="event_start ASC">COM_U3ABOOKING_EVENT_START_ASC</option>
+            name="fullordering"
+            type="list"
+            label="COM_U3ABOOKING_LIST_FULL_ORDERING"
+            description="COM_U3ABOOKING_LIST_FULL_ORDERING_DESC"
+            onchange="this.form.submit();"
+            default="id ASC"
+            >
+            <option value="">JGLOBAL_SORT_BY</option>
+            <option value="event_title ASC">COM_U3ABOOKING_EVENT_TITLE_ASC</option>
+            <option value="event_title DESC">COM_U3ABOOKING_EVENT_TITLE_DESC</option>
+            <option value="event_start ASC">COM_U3ABOOKING_EVENT_START_ASC</option>
             <option value="event_start DESC">COM_U3ABOOKING_EVENT_START_DESC</option>
-			<option value="booking_reference ASC">COM_U3ABOOKING_BOOKING_REFERENCE_ASC</option>
+            <option value="booking_reference ASC">COM_U3ABOOKING_BOOKING_REFERENCE_ASC</option>
             <option value="booking_reference DESC">COM_U3ABOOKING_BOOKING_REFERENCE_DESC</option>
-			<option value="num_tickets ASC">COM_U3ABOOKING_NUM_TICKETS_ASC</option>
+            <option value="num_tickets ASC">COM_U3ABOOKING_NUM_TICKETS_ASC</option>
             <option value="num_tickets DESC">COM_U3ABOOKING_NUM_TICKETS_DESC</option>
-			<option value="email ASC">COM_U3ABOOKING_EMAIL_ASC</option>
+            <option value="email ASC">COM_U3ABOOKING_EMAIL_ASC</option>
             <option value="email DESC">COM_U3ABOOKING_EMAIL_DESC</option>
             <option value="username ASC">COM_U3ABOOKING_USERNAME_ASC</option>
             <option value="username DESC">COM_U3ABOOKING_USERNAME_DESC</option>
             <option value="created ASC">COM_U3ABOOKING_CREATED_ASC</option>
             <option value="created DESC">COM_U3ABOOKING_CREATED_DESC</option>
-			<option value="id ASC">JGRID_HEADING_ID_ASC</option>
-			<option value="id DESC">JGRID_HEADING_ID_DESC</option>
-		</field>
-		<field
-			name="limit"
-			type="limitbox"
-			class="input-mini"
-			default="25"
-			label="COM_U3ABOOKING_LIST_LIMIT"
-			onchange="this.form.submit();"
-		/>
-	</fields>
+            <option value="id ASC">JGRID_HEADING_ID_ASC</option>
+            <option value="id DESC">JGRID_HEADING_ID_DESC</option>
+        </field>
+        <field
+            name="limit"
+            type="limitbox"
+            class="input-mini"
+            default="25"
+            label="COM_U3ABOOKING_LIST_LIMIT"
+            onchange="this.form.submit();"
+        />
+    </fields>
 </form>
